@@ -15,7 +15,6 @@ STRIPE_URL_USD = "https://buy.stripe.com/your_actual_stripe_link_usd"
 STRIPE_URL_EUR = "https://buy.stripe.com/your_actual_stripe_link_eur"
 PROMPTPAY_ID = "0812345678"  # PromptPay ID บัญชีพี่ยอด CEO
 
-# โครงสร้างราคาและอัตราแปลงสกุลเงินคงที่ (Fixed Production Rates)
 PRICING_CONFIG = {
     "USD": {
         "symbol": "$",
@@ -40,7 +39,6 @@ PRICING_CONFIG = {
     }
 }
 
-# แผนผังผูกภาษาเข้ากับสกุลเงินอัตโนมัติ (Language to Default Currency Mapping)
 LANG_TO_CURR = {
     "TH": "THB",
     "EN": "USD",
@@ -54,7 +52,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom Styling ปรับปรุง Contrast สีให้อ่านง่าย คมชัด และไม่จมทุกโหมด
+# Custom Styling เพิ่มความคมชัด รองรับ Hero Banner และ Legal Footer
 st.markdown("""
 <head>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -67,17 +65,37 @@ st.markdown("""
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         color: #FFFFFF !important;
     }
-    .main-title { 
-        font-size: 2.2rem; 
-        font-weight: 800; 
-        color: #10B981 !important; 
-        margin-bottom: 2px; 
+    /* Hero Banner Styling (ข้อ 1) */
+    .hero-container {
+        background: linear-gradient(135deg, #064E3B 0%, #0F172A 100%);
+        border: 1px solid #10B981;
+        border-radius: 16px;
+        padding: 32px 28px;
+        margin-bottom: 24px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+    .hero-title {
+        font-size: 2.3rem;
+        font-weight: 800;
+        color: #34D399 !important;
+        margin-bottom: 8px;
         letter-spacing: -0.5px;
     }
-    .sub-title { 
-        font-size: 1.05rem; 
-        color: #94A3B8 !important; 
-        margin-bottom: 24px; 
+    .hero-subtitle {
+        font-size: 1.15rem;
+        color: #E2E8F0 !important;
+        line-height: 1.6;
+        margin-bottom: 12px;
+    }
+    .hero-badge {
+        display: inline-block;
+        background: rgba(16, 185, 129, 0.2);
+        color: #6EE7B7 !important;
+        border: 1px solid #10B981;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
     }
     .white-card { 
         background-color: #1E293B; 
@@ -125,7 +143,6 @@ st.markdown("""
         color: #F8FAFC !important;
         line-height: 1.5;
     }
-    /* Infinite Pure Image Carousel Styling */
     .carousel-track-container {
         overflow: hidden;
         width: 100%;
@@ -166,7 +183,27 @@ st.markdown("""
         0% { transform: translateX(0); }
         100% { transform: translateX(calc(-240px * 4)); }
     }
-    /* บังคับสีตัวอักษรให้อ่านออกชัดเจน */
+    /* Legal Footer & Affiliate Notice (ข้อ 3) */
+    .legal-footer {
+        background-color: #0F172A;
+        border: 1px solid #1E293B;
+        border-radius: 12px;
+        padding: 24px;
+        margin-top: 40px;
+        margin-bottom: 20px;
+        font-size: 0.86rem;
+        color: #94A3B8 !important;
+        line-height: 1.7;
+    }
+    .legal-footer-links a {
+        color: #38BDF8 !important;
+        text-decoration: none;
+        margin-right: 18px;
+        font-weight: 600;
+    }
+    .legal-footer-links a:hover {
+        text-decoration: underline;
+    }
     div[data-testid="stMarkdownContainer"] p, 
     div[data-testid="stMarkdownContainer"] span,
     div[data-testid="stMarkdownContainer"] b {
@@ -176,12 +213,13 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ==============================================================================
-# SECTION 2: COMPREHENSIVE TRILINGUAL LOCALIZATION (TH / EN / DE)
+# SECTION 2: LOCALIZATION (TH / EN / DE)
 # ==============================================================================
 I18N = {
     "TH": {
-        "title": "🌿 ระบบคำนวณและออกแบบจัดสวนอัจฉริยะ AI99",
-        "subtitle": "คำนวณสัดส่วนพื้นที่ตรงรุ่น • ปรับแต่งทรงและสีตามต้องการ • สั่งซื้อชุดอุปกรณ์ครบวงจร",
+        "hero_badge": "🌿 สถาปัตยกรรมจัดสวนพื้นที่จำกัดอัจฉริยะ",
+        "hero_title": "เนรมิตพื้นที่สวนในฝัน สู่ความจริงด้วย AI99",
+        "hero_desc": "คำนวณสัดส่วนพื้นที่ระเบียงและมุมห้องจริงอย่างแม่นยำ พร้อมแปลนจัดวางชุดอุปกรณ์และตารางสั่งซื้อครบวงจรในที่เดียว",
         "sidebar_guide": "🤖 ผู้ช่วยแนะนำระบบ (AI Guide)",
         "sidebar_safety": "ระบบคุมตรรกะความปลอดภัย: Zero-Hallucination Guard",
         "quick_questions": "คำถามยอดนิยม:",
@@ -197,7 +235,7 @@ I18N = {
         "dim_title": "📌 สเปกมิติมาตรฐานของพื้นที่ (Standard Space Dimensions)",
         "dim_w": "ความกว้าง", "dim_h": "ความสูง", "dim_d": "ความลึก", "meter": "เมตร",
         "category_txt": "ประเภทหมวดหมู่", "arch_name": "ชื่อสถาปัตยกรรม",
-        "scan_header": "📷 สแกนหรืออัปโหลดภาพพื้นที่จริงของคุณ",
+        "scan_header": "📷 อัปโหลดหรือสแกนภาพพื้นที่จริงของคุณ",
         "scan_desc": "บันทึกภาพมุมระเบียง ห้อง หรือสวน เพื่อให้ระบบนำไปคำนวณสัดส่วนและจัดวางชุดอุปกรณ์ลงในพื้นที่ได้อย่างแม่นยำ (รองรับไฟล์ JPG, PNG หรือเปิดกล้องสด)",
         "cam_choice": ["📁 อัปโหลดรูปภาพ (Upload File)", "📷 เปิดกล้องสด (Camera)"],
         "cam_prompt": "สแกนมุมระเบียงหรือห้องที่ต้องการจัดวาง",
@@ -244,11 +282,14 @@ I18N = {
         "pay_thb_desc": "สแกน QR Code พร้อมเพย์ ชำระตรงเข้าบัญชี",
         "upload_slip": "แนบสลิปโอนเงินเพื่อปลดล็อกสิทธิ์ใช้งาน:",
         "btn_slip": "ยืนยันการส่งสลิปโอนเงิน",
-        "slip_ok": "ระบบได้รับข้อมูลสลิปเรียบร้อยแล้ว กำลังดำเนินการตรวจสอบเปิดสิทธิ์การใช้งาน 4 เดือนครับ"
+        "slip_ok": "ระบบได้รับข้อมูลสลิปเรียบร้อยแล้ว กำลังดำเนินการตรวจสอบเปิดสิทธิ์การใช้งาน 4 เดือนครับ",
+        "aff_disclosure": "📢 **การเปิดเผยความโปร่งใสทาง Affiliate:** ในฐานะ Amazon Associate ทางเราอาจได้รับค่าตอบแทนจากยอดสั่งซื้อที่มีคุณสมบัติตรงตามเกณฑ์ โดยไม่เพิ่มภาระค่าใช้จ่ายใดๆ แก่ผู้ซื้อ ภาพและไฟล์ที่อัปโหลดจะถูกประมวลผลเฉพาะบนเซสชันชั่วคราวเท่านั้น ไม่มีการนำไปเผยแพร่ต่อสาธารณะ",
+        "footer_rights": "© 2026 AI99 Garden Design Architecture. สงวนลิขสิทธิ์ทุกประการ"
     },
     "EN": {
-        "title": "🌿 AI 99 Garden Design",
-        "subtitle": "Precision Area Computation • Modular Shapes & Colors • Complete Kit Sourcing",
+        "hero_badge": "🌿 AI-Powered Spatial Garden Architecture",
+        "hero_title": "Transform Your Garden Vision into Reality",
+        "hero_desc": "Turn your compact balcony or indoor space into an engineered greenery sanctuary with precise automated BOM calculations and instant parts sourcing.",
         "sidebar_guide": "🤖 Assistant Guide (AI Guide)",
         "sidebar_safety": "Safety Logic Protocol: Zero-Hallucination Guard",
         "quick_questions": "Frequently Asked Questions:",
@@ -264,8 +305,8 @@ I18N = {
         "dim_title": "📌 Standard Specifications & Dimensions",
         "dim_w": "Width", "dim_h": "Height", "dim_d": "Depth", "meter": "m",
         "category_txt": "Category", "arch_name": "Architecture Title",
-        "scan_header": "📷 Scan or Upload Your Actual Space",
-        "scan_desc": "Capture or upload your balcony, room, or garden corner for accurate dimensional computation and equipment fit (Supports JPG, PNG, or Live Camera).",
+        "scan_header": "📷 Upload or Scan Your Space",
+        "scan_desc": "Capture or upload your balcony, room, or garden corner for accurate dimensional computation (Supports JPG, PNG, or Live Camera).",
         "cam_choice": ["📁 File Upload", "📷 Live Camera"],
         "cam_prompt": "Scan your balcony or indoor room corner",
         "upload_prompt": "Upload space image file (JPG, PNG)",
@@ -311,11 +352,14 @@ I18N = {
         "pay_thb_desc": "Scan PromptPay QR for direct local transfer.",
         "upload_slip": "Upload bank transfer confirmation slip:",
         "btn_slip": "Submit Transfer Slip",
-        "slip_ok": "Slip received. Activating your 4-month seasonal account now."
+        "slip_ok": "Slip received. Activating your 4-month seasonal account now.",
+        "aff_disclosure": "📢 **Affiliate Disclosure:** As an Amazon Associate, we earn from qualifying purchases at zero additional cost to you. Uploaded images are strictly processed in private sessions and are never stored or shared publicly.",
+        "footer_rights": "© 2026 AI99 Garden Design Architecture. All rights reserved."
     },
     "DE": {
-        "title": "🌿 AI99 Intelligentes Garten-Raumplanungssystem",
-        "subtitle": "Präzise Raumberechnung • Individuelle Formen & Farben • Vollständiges Ausrüstungsset",
+        "hero_badge": "🌿 KI-Garten-Raumplanungssystem",
+        "hero_title": "Verwirklichen Sie Ihre Gartenvision mit AI99",
+        "hero_desc": "Verwandeln Sie Ihren Balkon oder Innenraum in eine durchdachte grüne Oase mit präzisen Stücklistenberechnungen und direkter Beschaffung.",
         "sidebar_guide": "🤖 Systemassistent (AI Guide)",
         "sidebar_safety": "Sicherheitskontrolle: Zero-Hallucination Guard",
         "quick_questions": "Häufige Fragen:",
@@ -332,7 +376,7 @@ I18N = {
         "dim_w": "Breite", "dim_h": "Höhe", "dim_d": "Tiefe", "meter": "m",
         "category_txt": "Kategorie", "arch_name": "Architektur-Titel",
         "scan_header": "📷 Scannen oder Hochladen Ihres Raumbildes",
-        "scan_desc": "Erfassen oder laden Sie Ihren Balkon, Raum oder Gartenbereich hoch, um präzise Maßberechnungen und Platzierungen zu ermöglichen (Unterstützt JPG, PNG oder Live-Kamera).",
+        "scan_desc": "Erfassen oder laden Sie Ihren Balkon, Raum oder Gartenbereich hoch, um präzise Maßberechnungen zu ermöglichen (Unterstützt JPG, PNG oder Live-Kamera).",
         "cam_choice": ["📁 Datei-Upload", "📷 Live-Kamera"],
         "cam_prompt": "Balkon oder Raumecke scannen",
         "upload_prompt": "Raumbild auswählen (JPG, PNG)",
@@ -378,7 +422,9 @@ I18N = {
         "pay_thb_desc": "PromptPay QR für direkte Überweisung scannen.",
         "upload_slip": "Zahlungsbeleg hochladen:",
         "btn_slip": "Beleg übermitteln",
-        "slip_ok": "Beleg empfangen. Der 4-monatige Zugang wird unverzüglich aktiviert."
+        "slip_ok": "Beleg empfangen. Der 4-monatige Zugang wird unverzüglich aktiviert.",
+        "aff_disclosure": "📢 **Affiliate-Hinweis:** Als Amazon-Partner verdienen wir an qualifizierten Verkäufen ohne zusätzliche Kosten für Sie. Hochgeladene Fotos werden streng vertraulich nur für Ihre aktuelle Sitzung verarbeitet.",
+        "footer_rights": "© 2026 AI99 Garden Design Architecture. Alle Rechte vorbehalten."
     }
 }
 
@@ -563,7 +609,6 @@ CATALOG = {
 }
 
 def get_amazon_link(keyword):
-    """สร้าง URL ค้นหาสินค้าบน Amazon พร้อม Affiliate Tag ประจำระบบ"""
     encoded = urllib.parse.quote_plus(keyword)
     return f"https://www.amazon.com/s?k={encoded}&tag={AMAZON_AFFILIATE_TAG}"
 
@@ -571,10 +616,6 @@ def get_amazon_link(keyword):
 # SECTION 4: SECURITY LAYER & ZERO-HALLUCINATION AI TOUR GUIDE
 # ==============================================================================
 def secure_ai_guide(user_query, active_style_data, lang="TH"):
-    """
-    ป้อมคุมตรรกะความปลอดภัย สกัด Prompt Injection / Anti-Spam / Rate-limiting
-    และตอบเฉพาะข้อมูลในขอบเขตสถาปัตยกรรมจัดสวน AI99
-    """
     now = time.time()
     if "last_request_time" not in st.session_state:
         st.session_state.last_request_time = 0
@@ -648,7 +689,6 @@ if "user_curr" not in st.session_state:
     st.session_state.user_curr = "THB"
 
 def on_lang_change():
-    """เมื่อผู้ใช้เปลี่ยนภาษา ให้สลับสกุลเงินตามความเหมาะสมอัตโนมัติ"""
     st.session_state.user_curr = LANG_TO_CURR[st.session_state.user_lang]
 
 with st.sidebar:
@@ -718,10 +758,15 @@ with st.sidebar:
     st.caption(f"Active Sync Engine: **{selected_lang} ➔ {selected_currency_key}**")
 
 # ==============================================================================
-# SECTION 6: WORKSPACE HEADER
+# SECTION 6: HERO BANNER (ข้อ 1: ขายผลลัพธ์ทันทีที่เปิดหน้าแรก)
 # ==============================================================================
-st.markdown(f"<div class='main-title'>{t['title']}</div>", unsafe_allow_html=True)
-st.markdown(f"<div class='sub-title'>{t['subtitle']}</div>", unsafe_allow_html=True)
+st.markdown(f"""
+<div class='hero-container'>
+    <span class='hero-badge'>{t['hero_badge']}</span>
+    <div class='hero-title'>{t['hero_title']}</div>
+    <div class='hero-subtitle'>{t['hero_desc']}</div>
+</div>
+""", unsafe_allow_html=True)
 
 # ==============================================================================
 # SECTION 7: STEP 1 - ARCHITECTURE SELECTION & PURE FLOWING CAROUSEL
@@ -752,7 +797,6 @@ style_disp_title = current_style["title_th"] if selected_lang == "TH" else (
 
 col1, col2 = st.columns([1, 1], gap="medium")
 
-# ชุดรูปภาพ 4 แนวตรงรุ่น 100%
 IMG_BALCONY = "https://lh3.googleusercontent.com/d/1y3A2kCG-JhqbysqN6e0M5aG4iiG3HRdD"
 IMG_MUSHROOM = "https://lh3.googleusercontent.com/d/1xcOBnsLuCZBM7gVe8XURQqrlnP7-R-pO"
 IMG_INDOOR = "https://lh3.googleusercontent.com/d/1-8q8l4pGELAYp0_tn6Z387aq9XclS_3p"
@@ -794,7 +838,6 @@ with col1:
 with col2:
     st.markdown(f"#### {t['scan_header']}")
     st.caption(t['scan_desc'])
-    # ตั้งค่า index=0 เป็น Upload File ป้องกันการเปิดกล้องขู่ลูกค้า
     cam_mode = st.radio("Camera Option:", t['cam_choice'], index=0, horizontal=True, label_visibility="collapsed")
     if cam_mode == t['cam_choice'][1]:
         st.camera_input(t['cam_prompt'])
@@ -821,7 +864,6 @@ if "quantities" not in st.session_state:
 
 total_estimated_base = 0.0
 
-# ส่วนหัวตาราง BOM
 header_c1, header_c2, header_c3, header_c4 = st.columns([4, 2, 2, 3])
 with header_c1:
     st.write(f"**{t['col_name']}**")
@@ -887,7 +929,6 @@ with col_buy:
     search_all = f"{current_style['category']} {pot_color.split(' ')[0]}"
     st.link_button(t['btn_buy_all'], get_amazon_link(search_all), use_container_width=True)
 
-# บล็อกเงื่อนไขทางกฎหมาย 120 วัน (Strict Non-Refundable)
 st.markdown(f"""
 <div class='legal-box'>
     <b>{t['legal_title']} ({curr['format']} / {ACCESS_PERIOD_DAYS} Days):</b><br>
@@ -897,7 +938,6 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-# คำชี้แจงนำหน้า 2 ปุ่มมหัศจรรย์
 st.info(t['legal_notice'])
 
 chk1 = st.checkbox(t['chk1_txt'])
@@ -906,7 +946,6 @@ chk2 = st.checkbox(t['chk2_txt'])
 if chk1 and chk2:
     st.success(t['legal_unlock'])
     
-    # เรียงลำดับแท็บชำระเงินให้ตรงกับภาษาที่เลือกอัตโนมัติ
     if selected_lang == "TH":
         tab1, tab2, tab3 = st.tabs([
             f"{t['pay_thb_tab']} - ฿5,090", 
@@ -963,3 +1002,23 @@ if chk1 and chk2:
                 st.info(t['slip_ok'])
 else:
     st.info(t['legal_lock'])
+
+# ==============================================================================
+# SECTION 10: LEGAL FOOTER & AFFILIATE DISCLOSURE (ข้อ 3: ความโปร่งใสและกฎหมายสากล)
+# ==============================================================================
+st.markdown(f"""
+<div class='legal-footer'>
+    <div style='margin-bottom: 12px;'>
+        {t['aff_disclosure']}
+    </div>
+    <div class='legal-footer-links' style='margin-bottom: 12px;'>
+        <a href='#'>Privacy Policy</a>
+        <a href='#'>Terms of Service</a>
+        <a href='#'>Impressum (Legal Notice)</a>
+        <a href='#'>Support Contact</a>
+    </div>
+    <div style='color: #64748B; font-size: 0.8rem;'>
+        {t['footer_rights']}
+    </div>
+</div>
+""", unsafe_allow_html=True)
