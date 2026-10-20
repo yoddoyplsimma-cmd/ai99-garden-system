@@ -48,7 +48,7 @@ LANG_TO_CURR = {
 }
 
 st.set_page_config(
-    page_title="AI99 Intelligent Garden Spatial System",
+    page_title="AI 99 Garden Design",
     page_icon="🌿",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -237,7 +237,7 @@ I18N = {
         "slip_ok": "ระบบได้รับข้อมูลสลิปเรียบร้อยแล้ว กำลังดำเนินการตรวจสอบเปิดสิทธิ์การใช้งาน 4 เดือนครับ"
     },
     "EN": {
-        "title": "🌿 AI99 Intelligent Garden Spatial Design System",
+        "title": "🌿 AI 99 Garden Design",
         "subtitle": "Precision Area Computation • Modular Shapes & Colors • Complete Kit Sourcing",
         "sidebar_guide": "🤖 Assistant Guide (AI Guide)",
         "sidebar_safety": "Safety Logic Protocol: Zero-Hallucination Guard",
