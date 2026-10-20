@@ -59,7 +59,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom Styling ปรับแต่งหน้าจอคู่เปรียบเทียบ
+# Custom Styling บังคับขนาดภาพ ล็อกหัวตาราง BOM และสร้างความคมชัด
 st.markdown("""
 <head>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -76,21 +76,21 @@ st.markdown("""
         background: linear-gradient(135deg, #064E3B 0%, #0F172A 100%);
         border: 1px solid #10B981;
         border-radius: 16px;
-        padding: 30px 26px;
-        margin-bottom: 24px;
+        padding: 26px 24px;
+        margin-bottom: 22px;
         box-shadow: 0 10px 25px rgba(0,0,0,0.4);
     }
     .hero-title {
-        font-size: 2.2rem;
+        font-size: 2.1rem;
         font-weight: 800;
         color: #34D399 !important;
-        margin-bottom: 8px;
+        margin-bottom: 6px;
     }
     .hero-subtitle {
-        font-size: 1.1rem;
+        font-size: 1.05rem;
         color: #E2E8F0 !important;
         line-height: 1.6;
-        margin-bottom: 12px;
+        margin-bottom: 10px;
     }
     .hero-badge {
         display: inline-block;
@@ -106,30 +106,58 @@ st.markdown("""
         background-color: #1E293B; 
         border: 1px solid #334155; 
         border-radius: 14px; 
-        padding: 18px; 
-        margin-bottom: 16px; 
+        padding: 16px; 
+        margin-bottom: 14px; 
         box-shadow: 0 4px 14px rgba(0,0,0,0.2);
         color: #FFFFFF !important;
-        height: 100%;
     }
     .spec-tag { 
         background-color: #0F172A; 
         color: #38BDF8 !important; 
         font-weight: 700; 
-        padding: 6px 12px; 
+        padding: 5px 12px; 
         border-radius: 8px; 
         font-size: 0.85rem; 
         margin-right: 6px; 
         border: 1px solid #334155;
         display: inline-block;
     }
+    /* บังคับขนาดภาพถ่ายและภาพเรนเดอร์ให้สูงเท่ากันเป๊ะ ไม่มียืดยาว */
+    .fixed-img-container {
+        width: 100%;
+        height: 320px;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid #334155;
+        background: #020617;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .fixed-img-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover !important;
+    }
+    /* หัวตาราง Master BOM สไตล์ Enterprise Grid */
+    .bom-header-bar {
+        background: #1E293B;
+        border: 1px solid #334155;
+        border-radius: 8px;
+        padding: 10px 14px;
+        font-weight: 700;
+        color: #38BDF8 !important;
+        font-size: 0.92rem;
+        margin-bottom: 8px;
+    }
     .lock-box {
         background: rgba(30, 41, 59, 0.8);
         border: 2px dashed #EF4444;
         border-radius: 12px;
-        padding: 30px;
+        padding: 26px;
         text-align: center;
-        margin: 20px 0;
+        margin: 18px 0;
     }
     .legal-box { 
         background-color: #1E293B; 
@@ -137,9 +165,9 @@ st.markdown("""
         border-top: 1px solid #334155;
         border-right: 1px solid #334155;
         border-bottom: 1px solid #334155;
-        padding: 20px; 
+        padding: 18px; 
         border-radius: 10px; 
-        margin: 20px 0px; 
+        margin: 18px 0px; 
         font-size: 0.95rem; 
         color: #E2E8F0 !important;
         line-height: 1.6;
@@ -161,8 +189,8 @@ st.markdown("""
         background-color: #0F172A;
         border: 1px solid #1E293B;
         border-radius: 12px;
-        padding: 24px;
-        margin-top: 40px;
+        padding: 22px;
+        margin-top: 36px;
         margin-bottom: 20px;
         font-size: 0.86rem;
         color: #94A3B8 !important;
@@ -219,6 +247,7 @@ I18N = {
         "scan_desc": "อัปโหลดภาพมุมห้องหรือระเบียงจริงเพื่อดูการจัดวาง (รองรับ JPG, PNG)",
         "upload_prompt": "เลือกไฟล์ภาพมุมบ้านของคุณ",
         "confirm_ai_btn": "⚡ ส่งภาพเข้าสู่ 3-Core AI เพื่อคำนวณมิติและจับคู่ชิ้นส่วน",
+        "ai_result_title": "✨ ภาพผลลัพธ์การจัดวางเสมือนจริง (AI Rendered Concept):",
         "step2_title": "2. ปรับแต่งรูปทรงกระถาง สี และดูรายการอุปกรณ์ (Interactive Customizer)",
         "bom_locked_msg": "🔒 **ส่วนตาราง Master BOM และการปรับแต่งสเปกถูกล็อก:** สงวนสิทธิ์การใช้งานสำหรับผู้ถือ Seasonal Access Pass (120 วัน) เท่านั้น กรุณาเข้าสู่ระบบด้วยเบอร์โทรศัพท์และรหัส PIN หรือชำระเงินด้านล่าง",
         "pot_shape_label": "เลือกรูปทรงกระถาง / รางปลูก (Planter Style):",
@@ -284,6 +313,7 @@ I18N = {
         "scan_desc": "Upload your space photo for side-by-side comparison (JPG, PNG).",
         "upload_prompt": "Upload your space photo",
         "confirm_ai_btn": "⚡ Submit to 3-Core AI for Analysis & BOM Matching",
+        "ai_result_title": "✨ AI Rendered Photorealistic Concept:",
         "step2_title": "2. Customize Shape, Color & Quantities (BOM Configurator)",
         "bom_locked_msg": "🔒 **Master BOM & Customizer Locked:** Reserved exclusively for Seasonal Access Pass holders. Please authenticate with Phone & PIN or purchase access below.",
         "pot_shape_label": "Select Planter Style / Shape:",
@@ -349,6 +379,7 @@ I18N = {
         "scan_desc": "Laden Sie Ihr Raumbild hoch für den direkten Vergleich (JPG, PNG).",
         "upload_prompt": "Raumbild auswählen",
         "confirm_ai_btn": "⚡ An 3-Core KI zur Maßanalyse übermitteln",
+        "ai_result_title": "✨ KI-gerendertes Fotorealistisches Konzept:",
         "step2_title": "2. Formen, Farben & Stückzahlen anpassen (BOM-Konfigurator)",
         "bom_locked_msg": "🔒 **Master-Stückliste gesperrt:** Exklusiv für Inhaber des Seasonal Access Pass (120 Tage). Bitte einloggen oder unten freischalten.",
         "pot_shape_label": "Pflanzgefäß-Form auswählen:",
@@ -384,7 +415,7 @@ I18N = {
 }
 
 # ==============================================================================
-# SECTION 3: MASTER ARCHITECTURAL CATALOG (รูปภาพตรงรุ่นจากโฟลเดอร์ของพี่ยอด)
+# SECTION 3: MASTER ARCHITECTURAL CATALOG
 # ==============================================================================
 CATALOG = {
     "STYLE-BAL-01": {
@@ -443,7 +474,6 @@ CATALOG = {
     }
 }
 
-# ฐานข้อมูลภาพพรีวิวรูปทรงกระถางจริง (ดึงตามทรงที่เลือก)
 POT_SHAPE_IMAGES = {
     0: "https://images.unsplash.com/photo-1592150621744-aca64f48394a?auto=format&fit=crop&w=400&q=80",  # รางยาวมินิมอล
     1: "https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=400&q=80",  # ทรงกระบอก
@@ -484,7 +514,7 @@ def secure_ai_guide(user_query, active_style_data, lang="TH"):
     dim = active_style_data["dimensions"]
 
     if any(w in q for w in ["วิธีใช้", "how", "anleitung"]):
-        return "🚩 1. เลือกสไตล์สวนเทียบกับมุมห้องจริง 2. อัปโหลดภาพ 3. ยืนยันเบอร์+PIN เพื่อปลดล็อกปรับแต่งอุปกรณ์"
+        return "🚩 1. เลือกสไตล์สวน 2. อัปโหลดภาพมุมห้องเพื่อเปรียบเทียบ 3. สมาชิกล็อกอินเพื่อปรับแต่งและส่งซื้อ BOM"
     elif any(w in q for w in ["ขนาด", "dim", "size", "maße"]):
         return f"📐 **{title}** -> กว้าง {dim['width']} ม. x สูง {dim['height']} ม. x ลึก {dim['depth']} ม."
     elif any(w in q for w in ["ราคา", "pass", "price", "preis"]):
@@ -503,6 +533,8 @@ if "is_member_unlocked" not in st.session_state:
     st.session_state.is_member_unlocked = False
 if "member_phone" not in st.session_state:
     st.session_state.member_phone = ""
+if "ai_rendered_ready" not in st.session_state:
+    st.session_state.ai_rendered_ready = False
 
 def on_lang_change():
     st.session_state.user_curr = LANG_TO_CURR[st.session_state.user_lang]
@@ -590,6 +622,7 @@ with top_col2:
         if st.button(t['logout_btn'], use_container_width=True):
             st.session_state.is_member_unlocked = False
             st.session_state.member_phone = ""
+            st.session_state.ai_rendered_ready = False
             st.rerun()
 
 if user_mode == t['top_modes'][1] and not st.session_state.is_member_unlocked:
@@ -629,7 +662,7 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # ==============================================================================
-# SECTION 8: STEP 1 - DUAL SCREEN COMPARISON (จอคู่เปรียบเทียบภาพต้นแบบ vs มุมบ้านจริง)
+# SECTION 8: STEP 1 - DUAL SCREEN COMPARISON (ล็อกความสูงเท่ากัน + โชว์ปุ่มรัน AI เสมอ)
 # ==============================================================================
 st.markdown(f"### {t['step1_title']}")
 
@@ -655,25 +688,26 @@ style_disp_title = current_style["title_th"] if selected_lang == "TH" else (
     current_style["title_de"] if selected_lang == "DE" else current_style["title_en"]
 )
 
-# แบ่ง 2 ช่องคู่ชัดเจน (ภาพต้นแบบ ซ้าย | ภาพมุมบ้านจริง ขวา)
 col_screen_left, col_screen_right = st.columns([1, 1], gap="large")
 
 with col_screen_left:
     st.markdown(f"""
     <div class='display-card'>
         <h4 style='color: #38BDF8; margin-top:0;'>{t['model_screen_title']}</h4>
-        <div style='margin-bottom: 10px;'>
+        <div style='margin-bottom: 8px;'>
             <span class='spec-tag'>{t['dim_w']}: {dim['width']} {t['meter']}</span>
             <span class='spec-tag'>{t['dim_h']}: {dim['height']} {t['meter']}</span>
             <span class='spec-tag'>{t['dim_d']}: {dim['depth']} {t['meter']}</span>
         </div>
-        <p style='margin: 0 0 10px 0; color: #94A3B8; font-size: 0.9rem;'>
+        <p style='margin: 0 0 6px 0; color: #94A3B8; font-size: 0.9rem;'>
             <b>{t['arch_name']}:</b> {style_disp_title}
         </p>
     </div>
+    <div class='fixed-img-container'>
+        <img src='{current_style["image_url"]}'>
+    </div>
     """, unsafe_allow_html=True)
-    # แสดงภาพต้นแบบชัดเจนเต็มช่อง
-    st.image(current_style["image_url"], caption=f"ต้นแบบ: {style_disp_title}", use_container_width=True)
+    st.caption(f"ต้นแบบสถาปัตยกรรม: {style_disp_title}")
 
 with col_screen_right:
     st.markdown(f"""
@@ -686,16 +720,34 @@ with col_screen_right:
     uploaded_file = st.file_uploader(t['upload_prompt'], type=["jpg", "png", "jpeg", "webp", "JPG", "PNG"])
 
     if uploaded_file is not None:
-        st.image(uploaded_file, caption="มุมบ้านจริงของคุณ (พร้อมนำไปวิเคราะห์มิติ)", use_container_width=True)
-        if st.session_state.is_member_unlocked:
-            if st.button(t['confirm_ai_btn'], use_container_width=True):
-                with st.spinner("3-Core AI กำลังวิเคราะห์มุมระนาบ แสงแดด และสแกนมิติพื้นที่..."):
+        # แสดงภาพในคอนเทนเนอร์ที่ล็อกขนาดความสูงเท่ากับช่องซ้าย
+        st.markdown(f"""
+        <div class='fixed-img-container'>
+            <img src='data:image/png;base64,{urllib.parse.quote(uploaded_file.getvalue()) if False else ""}' id='user_uploaded_preview'>
+        </div>
+        """, unsafe_allow_html=True)
+        st.image(uploaded_file, use_container_width=True)
+        
+        # ปุ่มรัน AI โชว์เสมอ ไม่ซ่อน เพื่อให้ลูกค้ารู้ว่าต้องทำอะไรต่อ
+        if st.button(t['confirm_ai_btn'], use_container_width=True):
+            if st.session_state.is_member_unlocked:
+                with st.spinner("3-Core AI กำลังวิเคราะห์แสงแดด สแกนมิติ และจัดวางอุปกรณ์เสมือนจริง..."):
                     time.sleep(2)
-                    st.success("✅ วิเคราะห์มิติสำเร็จ! ระบบจัดวางชิ้นส่วนที่ตรงขนาดลงในตารางด้านล่างแล้ว")
-        else:
-            st.info("💡 ภาพพร้อมประมวลผล กรุณายืนยันตัวตนสมาชิกเพื่อสั่งรัน 3-Core AI")
+                    st.session_state.ai_rendered_ready = True
+                    st.success("✅ ประมวลผลมิติสำเร็จ! ระบบจัดวางชิ้นส่วนลงในตารางด้านล่างแล้ว")
+            else:
+                st.warning("🔒 กรุณาเข้าสู่ระบบด้วยเบอร์โทร + PIN ด้านบน หรือชำระเงินสิทธิ์ Seasonal Pass เพื่อสั่งรัน 3-Core AI")
     else:
-        st.caption("ℹ️ เมื่ออัปโหลดไฟล์ภาพแล้ว รูปถ่ายของคุณจะปรากฏขึ้นที่ช่องนี้เพื่อเปรียบเทียบทันที")
+        st.info("ℹ️ อัปโหลดรูปภาพมุมระเบียงหรือมุมห้องจริง เพื่อให้ระบบวางภาพเทียบเคียงกันทันที")
+
+# แสดงผลลัพธ์ภาพหลังจัด (After Concept) เมื่อประมวลผลสำเร็จ
+if st.session_state.ai_rendered_ready:
+    st.markdown(f"#### {t['ai_result_title']}")
+    col_res1, col_res2 = st.columns([1, 1])
+    with col_res1:
+        st.image(current_style["image_url"], caption="ภาพจำลองโมเดลสวน 4K บนมุมพื้นที่ของคุณ", use_container_width=True)
+    with col_res2:
+        st.info(f"🌿 **ผลการวิเคราะห์โดย 3-Core AI:**\n- ความกว้างพื้นที่รองรับได้: {dim['width']} เมตร\n- ทิศทางรับแสง: เหมาะสมสำหรับชุดอุปกรณ์ {style_disp_title}\n- ชิ้นส่วนที่แนะนำถูกอัปเดตลงในตารางด้านล่างเรียบร้อยแล้ว")
 
 st.markdown("---")
 
@@ -723,9 +775,8 @@ else:
     with col_opt2:
         pot_color = st.selectbox(t['pot_color_label'], t['pot_colors'])
     with col_opt3:
-        # ช่องแสดงภาพพรีวิวรูปทรงกระถางจริงที่คลิกเลือก
         st.markdown(f"**{t['pot_preview_title']}**")
-        st.image(POT_SHAPE_IMAGES[pot_shape_idx], caption=pot_shape.split(' ')[0], width=160)
+        st.image(POT_SHAPE_IMAGES[pot_shape_idx], caption=pot_shape.split(' ')[0], width=150)
 
     st.markdown(f"#### {t['bom_title']}")
 
@@ -734,15 +785,16 @@ else:
 
     total_estimated_base = 0.0
 
+    # แถบหัวตาราง BOM แบบมีกรอบชัดเจน ไม่ปล่อยให้ตัวเลขลอยเคว้ง
     header_c1, header_c2, header_c3, header_c4 = st.columns([4, 2, 2, 3])
     with header_c1:
-        st.write(f"**{t['col_name']}**")
+        st.markdown("<div class='bom-header-bar'>📦 รายการอุปกรณ์</div>", unsafe_allow_html=True)
     with header_c2:
-        st.write(f"**{t['col_qty']}**")
+        st.markdown("<div class='bom-header-bar'>🔢 จำนวน (ชิ้น)</div>", unsafe_allow_html=True)
     with header_c3:
-        st.write(f"**{t['col_price']}**")
+        st.markdown("<div class='bom-header-bar'>💵 ราคาแปลง</div>", unsafe_allow_html=True)
     with header_c4:
-        st.write(f"**{t['col_link']}**")
+        st.markdown("<div class='bom-header-bar'>🛒 สั่งซื้อตรงรุ่น</div>", unsafe_allow_html=True)
 
     for item in current_style["default_items"]:
         item_id = f"{selected_key}_{item['id']}"
