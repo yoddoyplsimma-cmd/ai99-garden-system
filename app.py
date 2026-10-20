@@ -666,7 +666,7 @@ st.markdown(f"<div class='main-title'>{t['title']}</div>", unsafe_allow_html=Tru
 st.markdown(f"<div class='sub-title'>{t['subtitle']}</div>", unsafe_allow_html=True)
 
 # ==========================================================
-# 7. สเต็ปที่ 1: เลือกสไตล์และสแกนพื้นที่ (Carousel ไดนามิก 3 ภาษาแท้)
+# 7. สเต็ปที่ 1: เลือกสไตล์และสแกนพื้นที่ (ภาพตรงรุ่น 100% ไม่สลับ ไม่เพี้ยน)
 # ==========================================================
 st.markdown(f"### {t['step1_title']}")
 
@@ -694,31 +694,40 @@ style_disp_title = current_style["title_th"] if selected_lang == "TH" else (
 
 col1, col2 = st.columns([1, 1])
 
-# กำหนดข้อความบรรยายใต้ภาพให้เปลี่ยนตามภาษาที่เลือกจริงแบบ 100%
-if selected_lang == "EN":
-    cap1, cap2, cap3, cap4 = "🌿 Vertical Balcony Garden", "🍄 Smart Mushroom Chamber", "🪴 Living Room Green Shelf", "🏡 Front Yard Trellis Wall"
-elif selected_lang == "DE":
-    cap1, cap2, cap3, cap4 = "🌿 Vertikaler Balkongarten", "🍄 Smarte Pilzkammer", "🪴 Wohnzimmer Pflanzenregal", "🏡 Vorgarten Spaliersystem"
+# ข้อความใต้ภาพ 3 ภาษาแท้
+if selected_lang == "DE":
+    cap1 = "🌿 Vertikaler Balkongarten"
+    cap2 = "🍄 Smarte Pilzkammer"
+    cap3 = "🪴 Wohnzimmer Pflanzenregal"
+    cap4 = "🏡 Vorgarten Spaliersystem"
+elif selected_lang == "EN":
+    cap1 = "🌿 Vertical Balcony Garden"
+    cap2 = "🍄 Smart Mushroom Chamber"
+    cap3 = "🪴 Living Room Green Shelf"
+    cap4 = "🏡 Front Yard Trellis Wall"
 else:
-    cap1, cap2, cap3, cap4 = "🌿 สวนแนวตั้งระเบียงคอนโด", "🍄 ตู้เห็ดอัจฉริยะในร่ม", "🪴 ชั้นวางไม้ห้องนั่งเล่น", "🏡 สวนระแนงหน้าบ้าน"
+    cap1 = "🌿 สวนแนวตั้งระเบียงคอนโด"
+    cap2 = "🍄 ตู้เห็ดอัจฉริยะในร่ม"
+    cap3 = "🪴 ชั้นวางไม้ห้องนั่งเล่น"
+    cap4 = "🏡 สวนระแนงหน้าบ้าน"
 
-# ชุดรูปภาพตรงสเปก โหลดเร็ว ไม่ติดบล็อก และไม่แตก
-img1 = "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=500&q=80"
-img2 = "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=500&q=80"
-img3 = "https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=500&q=80"
-img4 = "https://images.unsplash.com/photo-1558904541-efa8c4a08931?auto=format&fit=crop&w=500&q=80"
+# ชุดรูปภาพตรงของจริง 100% คมชัด โหลดไว ไม่ติดบล็อก และไม่เพี้ยน
+img1 = "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?auto=format&fit=crop&w=500&q=80"  # สวนแนวตั้งระเบียง
+img2 = "https://images.unsplash.com/photo-1504544750208-dc0358e539d9?auto=format&fit=crop&w=500&q=80"  # เพาะเห็ดในร่ม
+img3 = "https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=500&q=80"  # ชั้นวางต้นไม้ห้องนั่งเล่น
+img4 = "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=500&q=80"  # แผงระแนงไม้หน้าบ้าน
 
 CAROUSEL_HTML = f"""
 <div class="carousel-track-container">
     <div class="carousel-track">
-        <div class="carousel-slide"><img src="{img1}"><div class="carousel-caption">{cap1}</div></div>
-        <div class="carousel-slide"><img src="{img2}"><div class="carousel-caption">{cap2}</div></div>
-        <div class="carousel-slide"><img src="{img3}"><div class="carousel-caption">{cap3}</div></div>
-        <div class="carousel-slide"><img src="{img4}"><div class="carousel-caption">{cap4}</div></div>
-        <div class="carousel-slide"><img src="{img1}"><div class="carousel-caption">{cap1}</div></div>
-        <div class="carousel-slide"><img src="{img2}"><div class="carousel-caption">{cap2}</div></div>
-        <div class="carousel-slide"><img src="{img3}"><div class="carousel-caption">{cap3}</div></div>
-        <div class="carousel-slide"><img src="{img4}"><div class="carousel-caption">{cap4}</div></div>
+        <div class="carousel-slide"><img src="{img1}" alt="Balcony"><div class="carousel-caption">{cap1}</div></div>
+        <div class="carousel-slide"><img src="{img2}" alt="Mushroom"><div class="carousel-caption">{cap2}</div></div>
+        <div class="carousel-slide"><img src="{img3}" alt="Shelf"><div class="carousel-caption">{cap3}</div></div>
+        <div class="carousel-slide"><img src="{img4}" alt="Trellis"><div class="carousel-caption">{cap4}</div></div>
+        <div class="carousel-slide"><img src="{img1}" alt="Balcony"><div class="carousel-caption">{cap1}</div></div>
+        <div class="carousel-slide"><img src="{img2}" alt="Mushroom"><div class="carousel-caption">{cap2}</div></div>
+        <div class="carousel-slide"><img src="{img3}" alt="Shelf"><div class="carousel-caption">{cap3}</div></div>
+        <div class="carousel-slide"><img src="{img4}" alt="Trellis"><div class="carousel-caption">{cap4}</div></div>
     </div>
 </div>
 """
@@ -739,7 +748,6 @@ with col1:
     </div>
     """, unsafe_allow_html=True)
     
-    # วางภาพไหลวนใต้การ์ดสเปกมิติ
     st.markdown(CAROUSEL_HTML, unsafe_allow_html=True)
 
 with col2:
