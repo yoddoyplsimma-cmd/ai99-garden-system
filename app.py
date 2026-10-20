@@ -315,4 +315,408 @@ CATALOG = {
         "title_en": "Minimalist Vertical Balcony Salad Kit",
         "title_de": "Minimalistischer Vertikaler Balkon-Salatgarten",
         "category": "Balcony Micro-Space",
-        "dimensions": {"width": 1.20, "height": 2
+        "dimensions": {"width": 1.20, "height": 2.00, "depth": 0.45},
+        "default_items": [
+            {"id": "rack", "name": "โครงชั้นวางกัลวาไนซ์ 4-5 ชั้น ทรง Slim", "name_en": "Slim Galvanized 5-Tier Rack", "name_de": "Schlankes 5-Etagen-Regal Verzinkt", "qty": 1, "price_usd": 45.0, "search": "vertical garden wall planter rack outdoor"},
+            {"id": "planter", "name": "รางปลูกผักสลัด Food-grade ทน UV", "name_en": "Food-grade UV Resistant Planter Box", "name_de": "UV-beständiger Pflanzkasten Lebensmittelqualität", "qty": 4, "price_usd": 8.0, "search": "rectangular planter box UV resistant"},
+            {"id": "drip", "name": "ชุดระบบน้ำหยดอัตโนมัติ Micro-drip", "name_en": "Automatic Micro-Drip Irrigation Kit", "name_de": "Automatisches Micro-Drip Bewässerungsset", "qty": 1, "price_usd": 18.5, "search": "automatic micro drip irrigation kit balcony"},
+            {"id": "soil", "name": "ดินปลูกสูตรมินิมอลระบายน้ำไว (50L)", "name_en": "Organic Lightweight Potting Mix (50L)", "name_de": "Organische Pflanzerde leicht durchlässig (50L)", "qty": 2, "price_usd": 12.0, "search": "organic potting mix perlite lightweight"}
+        ]
+    },
+    "STYLE-MSH-01": {
+        "title_th": "สมาร์ทฟังกิพอด ตู้เห็ดในร่มกินได้ (Smart Fungi Pod)",
+        "title_en": "Indoor Micro Mushroom Chamber",
+        "title_de": "Smarte Indoor-Pilzzuchtkammer",
+        "category": "Mushroom Chamber",
+        "dimensions": {"width": 0.50, "height": 0.70, "depth": 0.40},
+        "default_items": [
+            {"id": "chamber", "name": "ตู้โหลแก้ว/อะคริลิก คุมความชื้นมินิมอล", "name_en": "Humidity Controlled Chamber Tent", "name_de": "Feuchtigkeitsgesteuerte Zuchtkammer", "qty": 1, "price_usd": 55.0, "search": "mushroom fruiting chamber grow tent"},
+            {"id": "humidifier", "name": "เครื่องพ่นหมอก Ultrasonic + เซนเซอร์", "name_en": "Ultrasonic Mist Maker + Sensor", "name_de": "Ultraschall-Vernebler mit Feuchtigkeitssensor", "qty": 1, "price_usd": 28.0, "search": "ultrasonic mist maker with humidity controller"},
+            {"id": "spores", "name": "ก้อนเชื้อเห็ดพรีเมียม (Oyster/Lion's Mane)", "name_en": "Organic Mushroom Grow Kit Substrate", "name_de": "Bio-Pilzzucht Substratblöcke", "qty": 4, "price_usd": 6.5, "search": "organic mushroom grow kit lion mane oyster"},
+            {"id": "light", "name": "ไฟ LED Bar 5W สเปกตรัมขาว", "name_en": "5W White Spectrum LED Grow Bar", "name_de": "5W Weißspektrum LED-Wachstumsleiste", "qty": 1, "price_usd": 14.0, "search": "small indoor led grow light bar for plants"}
+        ]
+    },
+    "STYLE-IND-01": {
+        "title_th": "ชั้นวางไม้และไฟปลูกในห้องรับแขก (Living Plant Shelf)",
+        "title_en": "Living Room Aesthetic Greenery Stand",
+        "title_de": "Ästhetisches Wohnzimmer-Pflanzenregal",
+        "category": "Indoor Greenery",
+        "dimensions": {"width": 1.00, "height": 1.60, "depth": 0.35},
+        "default_items": [
+            {"id": "wood_rack", "name": "ชั้นวางไม้โครงเหล็กนอร์ดิก 4 ชั้น", "name_en": "4-Tier Nordic Metal Wood Plant Stand", "name_de": "4-stufiges Nordisches Metall-Holz-Pflanzenregal", "qty": 1, "price_usd": 62.0, "search": "tiered plant stand indoor metal wood tall"},
+            {"id": "grow_light", "name": "ไฟ Grow Light ซ่อนใต้ชั้น Full Spectrum", "name_en": "Under-shelf Full Spectrum Grow Lights", "name_de": "Full-Spectrum Unterbau-Pflanzenleuchten", "qty": 3, "price_usd": 15.0, "search": "under shelf grow lights full spectrum warm white"},
+            {"id": "pots", "name": "กระถางเซรามิกมินิมอลพร้อมจานรอง", "name_en": "Modern Ceramic Pots with Saucers", "name_de": "Moderne Keramiktöpfe mit Untersetzern", "qty": 6, "price_usd": 7.0, "search": "ceramic plant pots with drainage hole saucer modern"}
+        ]
+    },
+    "STYLE-FYD-01": {
+        "title_th": "แผงสวนแนวตั้งระแนงหน้าบ้าน (Front Entrance Green Wall)",
+        "title_en": "Front Yard Compact Trellis System",
+        "title_de": "Kompaktes Vorgarten-Spaliersystem",
+        "category": "Front Yard",
+        "dimensions": {"width": 1.80, "height": 1.80, "depth": 0.50},
+        "default_items": [
+            {"id": "trellis", "name": "แผงระแนงเหล็กโมดูลาร์ตั้งพื้น พ่นกันสนิม", "name_en": "Freestanding Modular Garden Trellis", "name_de": "Freistehendes Modulares Gartenspalier", "qty": 1, "price_usd": 78.0, "search": "freestanding garden trellis wall panel metal"},
+            {"id": "hook_pots", "name": "กระถางแขวนระบบ Hook Lock เก็บน้ำสำรอง", "name_en": "Hook Lock Self-Watering Hanging Pots", "name_de": "Selbstbewässernde Hängepflanzkübel mit Haken", "qty": 12, "price_usd": 4.5, "search": "hanging wall planter pots self watering hook"},
+            {"id": "timer_drip", "name": "ระบบน้ำหยด PE พร้อมไทม์เมอร์ก๊อกน้ำ", "name_en": "Faucet Hose Timer + Drip Kit", "name_de": "Wasserhahn-Timer mit Tropfbewässerung", "qty": 1, "price_usd": 24.0, "search": "outdoor faucet hose timer with drip distribution tubing"}
+        ]
+    }
+}
+
+def get_amazon_link(keyword):
+    encoded = urllib.parse.quote_plus(keyword)
+    return f"https://www.amazon.com/s?k={encoded}&tag={AMAZON_AFFILIATE_TAG}"
+
+# ==========================================================
+# 4. ตัวคุมตรรกะ AI ไกด์นำทัวร์
+# ==========================================================
+def secure_ai_guide(user_query, active_style_data, lang="TH"):
+    now = time.time()
+    if "last_request_time" not in st.session_state:
+        st.session_state.last_request_time = 0
+        st.session_state.req_count = 0
+
+    if now - st.session_state.last_request_time < 2.0:
+        st.session_state.req_count += 1
+        if st.session_state.req_count > 4:
+            if lang == "TH": return "⚠️ ระบบตรวจพบคำขอถี่เกินไป กรุณารอสักครู่เพื่อความปลอดภัยครับ"
+            elif lang == "DE": return "⚠️ Zu viele Anfragen in kurzer Zeit. Bitte warten Sie einen Moment."
+            else: return "⚠️ Too many requests. Please wait a moment for security verification."
+    else:
+        st.session_state.req_count = 0
+
+    st.session_state.last_request_time = now
+
+    blacklist = ["ignore previous", "hack", "api key", "password", "system prompt", "database", "token", "root"]
+    if any(b in user_query.lower() for b in blacklist):
+        if lang == "TH": return "🛡️ ขออภัยครับ ระบบอนุญาตให้สอบถามเฉพาะข้อมูลสถาปัตยกรรมจัดสวนในหน้านี้เท่านั้น"
+        elif lang == "DE": return "🛡️ Zugriff verweigert: Nur Anfragen zur Gartenarchitektur erlaubt."
+        else: return "🛡️ Access restricted: Queries are strictly confined to spatial garden architecture."
+
+    q = user_query.lower()
+    title = active_style_data["title_th"] if lang == "TH" else (active_style_data["title_de"] if lang == "DE" else active_style_data["title_en"])
+    dim = active_style_data["dimensions"]
+
+    if any(w in q for w in ["วิธีใช้", "ทำยังไง", "ทัวร์", "start", "how", "anleitung"]):
+        if lang == "TH": return "🚩 **ขั้นตอนง่ายๆ 3 สเต็ป:**\n1. เลือกสไตล์สวนด้านบน แล้วเปิดกล้องถ่ายมุมห้องจริง\n2. เลื่อนลงมาปรับแต่งทรงกระถาง สี และจำนวนชิ้นในตาราง\n3. กดสั่งซื้ออุปกรณ์ผ่าน Amazon หรือปลดล็อกพิมพ์เขียว 4 เดือนที่ปุ่มด้านล่างครับ"
+        elif lang == "DE": return "🚩 **3 einfache Schritte:**\n1. Stil oben wählen und Raum mit Kamera scannen.\n2. Gefäßform, Farbe und Stückzahlen anpassen.\n3. Ausrüstung über Amazon bestellen oder 4-Monats-Bauplan freischalten."
+        else: return "🚩 **3 Quick Steps:**\n1. Select style and scan space.\n2. Customize planter forms and quantities.\n3. Order kit via Amazon or unlock the 4-Month Seasonal Blueprint below."
+
+    elif any(w in q for w in ["ขนาด", "พื้นที่", "กว้าง", "dim", "size", "fläche", "maße"]):
+        return f"📐 **{title}** -> {dim['width']}m x {dim['height']}m x {dim['depth']}m"
+
+    elif any(w in q for w in ["กระถาง", "สลับ", "เปลี่ยน", "pot", "planter", "topf"]):
+        if lang == "TH": return "💡 ปรับทรงกระถางและสีได้ในสเต็ป 2 ลิงก์ค้นหา Amazon จะปรับตรงรุ่นให้อัตโนมัติครับ"
+        elif lang == "DE": return "💡 Passen Sie Gefäßform und Farbe in Schritt 2 an. Amazon-Links aktualisieren sich automatisch."
+        else: return "💡 Adjust planter forms in Step 2. Amazon catalog search queries will update dynamically."
+
+    elif any(w in q for w in ["อายุ", "4 เดือน", "ราคา", "pass", "price", "preis"]):
+        return f"💳 Seasonal Pass: $139.95 USD / €129.00 EUR / ฿5,090 THB ({ACCESS_PERIOD_DAYS} Days full access)"
+
+    else:
+        if lang == "TH": return f"🌿 AI ไกด์พร้อมช่วยเหลือครับ สำหรับสไตล์ **{title}** สามารถปรับแต่งอุปกรณ์ได้ที่ตารางด้านล่างเลยครับ"
+        elif lang == "DE": return f"🌿 AI-Guide bereit. Für **{title}** können Sie die Ausrüstung unten anpassen."
+        else: return f"🌿 AI Guide standing by. Configure individual BOM units for **{title}** below."
+
+# ==========================================================
+# 5. ระบบ Session State & Auto-Sync (ภาษาพ่วงสกุลเงิน)
+# ==========================================================
+if "user_lang" not in st.session_state:
+    st.session_state.user_lang = "TH"
+if "user_curr" not in st.session_state:
+    st.session_state.user_curr = "THB"
+
+def on_lang_change():
+    st.session_state.user_curr = LANG_TO_CURR[st.session_state.user_lang]
+
+with st.sidebar:
+    st.markdown("### 🌐 เลือกภาษา / Language / Sprache")
+    selected_lang = st.radio(
+        "Language Selection:",
+        ["TH", "EN", "DE"],
+        key="user_lang",
+        on_change=on_lang_change,
+        horizontal=True,
+        label_visibility="collapsed"
+    )
+    t = I18N[selected_lang]
+
+    st.markdown("---")
+    st.markdown("### 💱 สกุลเงินชำระ / Currency")
+    currency_keys = list(PRICING_CONFIG.keys())
+    
+    selected_currency_key = st.radio(
+        "Currency Selector:",
+        currency_keys,
+        key="user_curr",
+        format_func=lambda x: PRICING_CONFIG[x]["label"],
+        horizontal=False
+    )
+    curr = PRICING_CONFIG[selected_currency_key]
+
+    st.markdown("---")
+    st.markdown(f"### {t['sidebar_guide']}")
+    st.caption(t['sidebar_safety'])
+    
+    st.write(f"**{t['quick_questions']}**")
+    col_b1, col_b2 = st.columns(2)
+    with col_b1:
+        ask_how = st.button(t['btn_how'], use_container_width=True)
+    with col_b2:
+        ask_dim = st.button(t['btn_dim'], use_container_width=True)
+        
+    col_b3, col_b4 = st.columns(2)
+    with col_b3:
+        ask_pot = st.button(t['btn_pot'], use_container_width=True)
+    with col_b4:
+        ask_pass = st.button(t['btn_pass'], use_container_width=True)
+
+    if "guide_msg" not in st.session_state:
+        st.session_state.guide_msg = "AI99 Ready. Select your design and ask questions anytime."
+
+    active_style_for_guide = CATALOG["STYLE-BAL-01"]
+    if ask_how:
+        st.session_state.guide_msg = secure_ai_guide("วิธีใช้", active_style_for_guide, selected_lang)
+    elif ask_dim:
+        st.session_state.guide_msg = secure_ai_guide("ขนาด", active_style_for_guide, selected_lang)
+    elif ask_pot:
+        st.session_state.guide_msg = secure_ai_guide("กระถาง", active_style_for_guide, selected_lang)
+    elif ask_pass:
+        st.session_state.guide_msg = secure_ai_guide("ราคา", active_style_for_guide, selected_lang)
+
+    custom_ask = st.text_input(t['ask_input_label'], placeholder=t['ask_placeholder'])
+    if st.button(t['btn_send'], use_container_width=True):
+        if custom_ask:
+            st.session_state.guide_msg = secure_ai_guide(custom_ask, active_style_for_guide, selected_lang)
+
+    st.markdown(f"<div class='guide-bubble'>{st.session_state.guide_msg}</div>", unsafe_allow_html=True)
+    
+    st.markdown("---")
+    st.caption(f"Affiliate Tag: `{AMAZON_AFFILIATE_TAG}`")
+    st.caption(f"Active Sync: **{selected_lang} ➔ {selected_currency_key}**")
+
+# ==========================================================
+# 6. ส่วนหัวของเว็บ (HEADER)
+# ==========================================================
+st.markdown(f"<div class='main-title'>{t['title']}</div>", unsafe_allow_html=True)
+st.markdown(f"<div class='sub-title'>{t['subtitle']}</div>", unsafe_allow_html=True)
+
+# ==========================================================
+# 7. สเต็ปที่ 1: เลือกสไตล์และสแกนพื้นที่ (พร้อมภาพสไลด์ไหลวน)
+# ==========================================================
+st.markdown(f"### {t['step1_title']}")
+
+def get_style_title(k, lang):
+    item = CATALOG[k]
+    if lang == "TH": return f"{item['category']} - {item['title_th']}"
+    elif lang == "DE": return f"{item['category']} - {item['title_de']}"
+    else: return f"{item['category']} - {item['title_en']}"
+
+style_keys = list(CATALOG.keys())
+selected_key = st.selectbox(
+    t['style_label'],
+    style_keys,
+    format_func=lambda x: get_style_title(x, selected_lang)
+)
+
+current_style = CATALOG[selected_key]
+dim = current_style["dimensions"]
+style_disp_title = current_style["title_th"] if selected_lang == "TH" else (current_style["title_de"] if selected_lang == "DE" else current_style["title_en"])
+
+col1, col2 = st.columns([1, 1])
+
+# โค้ด HTML แบนเนอร์ภาพไหลวนอัตโนมัติ
+CAROUSEL_HTML = """
+<div class="carousel-track-container">
+    <div class="carousel-track">
+        <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=500&q=80" alt="Vertical Garden">
+            <div class="carousel-caption">🌿 สวนแนวตั้งระเบียงคอนโด</div>
+        </div>
+        <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1592417817098-8f3d69104a47?w=500&q=80" alt="Mushroom Pod">
+            <div class="carousel-caption">🍄 ตู้เห็ดอัจฉริยะในร่ม</div>
+        </div>
+        <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1545241047-6083a3684587?w=500&q=80" alt="Living Plant Shelf">
+            <div class="carousel-caption">🪴 ชั้นวางไม้ห้องนั่งเล่น</div>
+        </div>
+        <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1558904541-efa8c4a08931?w=500&q=80" alt="Entrance Green Wall">
+            <div class="carousel-caption">🏡 สวนระแนงหน้าบ้าน</div>
+        </div>
+        <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=500&q=80" alt="Vertical Garden">
+            <div class="carousel-caption">🌿 สวนแนวตั้งระเบียงคอนโด</div>
+        </div>
+        <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1592417817098-8f3d69104a47?w=500&q=80" alt="Mushroom Pod">
+            <div class="carousel-caption">🍄 ตู้เห็ดอัจฉริยะในร่ม</div>
+        </div>
+        <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1545241047-6083a3684587?w=500&q=80" alt="Living Plant Shelf">
+            <div class="carousel-caption">🪴 ชั้นวางไม้ห้องนั่งเล่น</div>
+        </div>
+        <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1558904541-efa8c4a08931?w=500&q=80" alt="Entrance Green Wall">
+            <div class="carousel-caption">🏡 สวนระแนงหน้าบ้าน</div>
+        </div>
+    </div>
+</div>
+"""
+
+with col1:
+    st.markdown(f"""
+    <div class='white-card'>
+        <h4 style='color: #0F172A; margin-top:0;'>{t['dim_title']}</h4>
+        <div style='margin-bottom: 12px;'>
+            <span class='spec-tag'>{t['dim_w']}: {dim['width']} {t['meter']}</span>
+            <span class='spec-tag'>{t['dim_h']}: {dim['height']} {t['meter']}</span>
+            <span class='spec-tag'>{t['dim_d']}: {dim['depth']} {t['meter']}</span>
+        </div>
+        <p style='margin: 0; color: #475569; font-size: 0.9rem;'>
+            <b>{t['category_txt']}:</b> {current_style['category']}<br>
+            <b>{t['arch_name']}:</b> {style_disp_title}
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # วางภาพไหลวนใต้การ์ดสเปกมิติ
+    st.markdown(CAROUSEL_HTML, unsafe_allow_html=True)
+
+with col2:
+    st.markdown(f"#### {t['scan_title']}")
+    cam_mode = st.radio("Camera Option:", t['cam_choice'], horizontal=True, label_visibility="collapsed")
+    if cam_mode == t['cam_choice'][0]:
+        st.camera_input(t['cam_prompt'])
+    else:
+        st.file_uploader(t['upload_prompt'], type=["jpg", "png", "jpeg"])
+
+st.markdown("---")
+
+# ==========================================================
+# 8. สเต็ปที่ 2: แผงปรับแต่งสินค้า (BOM CUSTOMIZER)
+# ==========================================================
+st.markdown(f"### {t['step2_title']}")
+
+col_opt1, col_opt2 = st.columns(2)
+
+with col_opt1:
+    pot_shape = st.selectbox(t['pot_shape_label'], t['pot_shapes'])
+
+with col_opt2:
+    pot_color = st.selectbox(t['pot_color_label'], t['pot_colors'])
+
+st.markdown(f"#### {t['bom_title']}")
+
+if "quantities" not in st.session_state:
+    st.session_state.quantities = {}
+
+total_estimated_base = 0.0
+
+for item in current_style["default_items"]:
+    item_id = f"{selected_key}_{item['id']}"
+    if item_id not in st.session_state.quantities:
+        st.session_state.quantities[item_id] = item["qty"]
+
+    c_name, c_qty, c_price, c_aff = st.columns([4, 2, 2, 3])
+    
+    with c_name:
+        item_name = item["name"] if selected_lang == "TH" else (item["name_de"] if selected_lang == "DE" else item["name_en"])
+        if item["id"] in ["planter", "pots", "hook_pots"]:
+            item_name = f"{item_name} [{pot_shape.split(' ')[0]} - {pot_color.split(' ')[0]}]"
+        
+        unit_price = item["price_usd"] * curr["multiplier"]
+        st.write(f"**{item_name}**")
+        st.caption(f"{t['est_price']}: {curr['symbol']}{unit_price:,.2f}")
+        
+    with c_qty:
+        qty = st.number_input(
+            f"Qty ({item['id']})", 
+            min_value=0, 
+            max_value=50, 
+            value=st.session_state.quantities[item_id], 
+            key=f"input_{item_id}",
+            label_visibility="collapsed"
+        )
+        st.session_state.quantities[item_id] = qty
+        
+    with c_price:
+        subtotal_base = qty * item["price_usd"]
+        total_estimated_base += subtotal_base
+        subtotal_converted = subtotal_base * curr["multiplier"]
+        st.write(f"**{curr['symbol']}{subtotal_converted:,.2f}**")
+        
+    with c_aff:
+        query = f"{item['search']} {pot_color.split(' ')[0]}"
+        st.link_button(t['btn_amazon'], get_amazon_link(query))
+
+st.markdown("---")
+
+# ==========================================================
+# 9. สเต็ปที่ 3: สรุปยอด & ท่อรับเงิน (จัดแท็บตามภาษาอัตโนมัติ)
+# ==========================================================
+col_sum, col_buy = st.columns([1, 1])
+total_converted = total_estimated_base * curr["multiplier"]
+
+with col_sum:
+    st.markdown(f"### {t['step3_title']} `{curr['symbol']}{total_converted:,.2f}`")
+    st.caption(t['amazon_note'])
+
+with col_buy:
+    search_all = f"{current_style['category']} {pot_color.split(' ')[0]}"
+    st.link_button(t['btn_buy_all'], get_amazon_link(search_all), use_container_width=True)
+
+# ----------------------------------------------------------
+# ส่วนสัญญา 2 ปุ่มมหัศจรรย์ และแท็บชำระเงินเรียงตามภาษา
+# ----------------------------------------------------------
+st.markdown(f"""
+<div class='legal-box'>
+    <b>{t['legal_title']} ({curr['format']} / {ACCESS_PERIOD_DAYS} Days):</b><br>
+    {t['legal_rule1']}<br>
+    {t['legal_rule2']}<br>
+    {t['legal_rule3']}
+</div>
+""", unsafe_allow_html=True)
+
+chk1 = st.checkbox(t['chk1_txt'])
+chk2 = st.checkbox(t['chk2_txt'])
+
+if chk1 and chk2:
+    st.success(t['legal_unlock'])
+    
+    # เรียงลำดับแท็บชำระเงินให้แท็บแรกตรงกับภาษาที่เลือกอัตโนมัติ
+    if selected_lang == "TH":
+        tab1, tab2, tab3 = st.tabs([f"{t['pay_thb_tab']} - ฿5,090", f"{t['pay_usd_tab']} - $139.95", f"{t['pay_eur_tab']} - €129.00"])
+        active_tab_order = ["THB", "USD", "EUR"]
+    elif selected_lang == "DE":
+        tab1, tab2, tab3 = st.tabs([f"{t['pay_eur_tab']} - €129.00", f"{t['pay_usd_tab']} - $139.95", f"{t['pay_thb_tab']} - ฿5,090"])
+        active_tab_order = ["EUR", "USD", "THB"]
+    else:
+        tab1, tab2, tab3 = st.tabs([f"{t['pay_usd_tab']} - $139.95", f"{t['pay_eur_tab']} - €129.00", f"{t['pay_thb_tab']} - ฿5,090"])
+        active_tab_order = ["USD", "EUR", "THB"]
+
+    tab_map = {active_tab_order[0]: tab1, active_tab_order[1]: tab2, active_tab_order[2]: tab3}
+
+    # แท็บ USD
+    with tab_map["USD"]:
+        st.write(t['pay_stripe_desc'])
+        st.link_button(f"{t['btn_stripe']} ($139.95 USD / 4 Months)", STRIPE_URL_USD, use_container_width=True)
+
+    # แท็บ EUR
+    with tab_map["EUR"]:
+        st.write(t['pay_stripe_desc'])
+        st.link_button(f"{t['btn_stripe']} (€129.00 EUR / 4 Monate)", STRIPE_URL_EUR, use_container_width=True)
+
+    # แท็บ THB
+    with tab_map["THB"]:
+        st.write(f"{t['pay_thb_desc']} ยอดชำระ: **฿5,090 บาท** (สิทธิ์ 4 เดือนเต็ม)")
+        qr_code_url = f"https://promptpay.io/{PROMPTPAY_ID}/5090.png"
+        col_q, col_s = st.columns([1, 1])
+        with col_q:
+            st.image(qr_code_url, caption=f"PromptPay ID: {PROMPTPAY_ID}", width=220)
+        with col_s:
+            st.file_uploader(t['upload_slip'], type=["jpg", "png", "pdf"])
+            if st.button(t['btn_slip']):
+                st.info(t['slip_ok'])
+else:
+    st.info(t['legal_lock'])
