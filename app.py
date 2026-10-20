@@ -189,7 +189,8 @@ I18N = {
         "dim_title": "📌 สเปกมิติมาตรฐานของพื้นที่ (Standard Space Dimensions)",
         "dim_w": "ความกว้าง", "dim_h": "ความสูง", "dim_d": "ความลึก", "meter": "เมตร",
         "category_txt": "ประเภทหมวดหมู่", "arch_name": "ชื่อสถาปัตยกรรม",
-        "scan_title": "📷 ถ่ายภาพหรือสแกนพื้นที่จริงของท่าน",
+        "scan_header": "📷 สแกนหรืออัปโหลดภาพพื้นที่จริงของคุณ",
+        "scan_desc": "บันทึกภาพมุมระเบียง ห้อง หรือสวน เพื่อให้ระบบนำไปคำนวณสัดส่วนและจัดวางชุดอุปกรณ์ลงในพื้นที่ได้อย่างแม่นยำ (รองรับไฟล์ JPG, PNG หรือเปิดกล้องสด)",
         "cam_choice": ["เปิดกล้องสด (Camera)", "อัปโหลดรูปภาพ (Upload)"],
         "cam_prompt": "สแกนมุมระเบียงหรือห้องที่ต้องการจัดวาง",
         "upload_prompt": "เลือกไฟล์ภาพพื้นที่มุมบ้าน (JPG, PNG)",
@@ -222,8 +223,9 @@ I18N = {
         "legal_rule1": f"- สิทธิ์นี้ครอบคลุมการเข้าถึงไฟล์พิมพ์เขียว แผนผังระบบ และการคำนวณสเปกสถาปัตยกรรมเป็นเวลา <b>{ACCESS_PERIOD_DAYS} วัน (4 เดือนเต็ม)</b>",
         "legal_rule2": "- เมื่อครบกำหนด 4 เดือน สิทธิ์จะสิ้นสุดลงโดยอัตโนมัติ ไม่มีการต่ออายุหรือเรียกเก็บเงินซ้ำซ้อน",
         "legal_rule3": "- การเข้าถึงระบบถือเป็นการส่งมอบสินทรัพย์ดิจิทัลเสร็จสมบูรณ์ทันที มีผลผูกพันตามกฎหมายธุรกรรมอิเล็กทรอนิกส์",
-        "chk1_txt": "1. ข้าพเจ้ายอมรับข้อตกลงการให้บริการ และนโยบายทรัพย์สินทางปัญญาของ AI99 (Terms of Service)",
-        "chk2_txt": "2. ข้าพเจ้ายืนยันสละสิทธิ์การขอคืนเงินทุกกรณี 100% หลังเข้าถึงระบบ (Strict Non-Refundable Policy)",
+        "legal_notice": "ℹ️ **คำชี้แจงก่อนชำระเงิน:** โปรดตรวจสอบและทำเครื่องหมายยอมรับข้อตกลงทั้ง 2 ข้อด้านล่าง เพื่อปลดล็อกช่องทางการชำระเงินสำหรับสิทธิ์การใช้งาน Seasonal Access Pass (120 วันเต็ม)",
+        "chk1_txt": "1. ข้าพเจ้ายอมรับข้อตกลงการให้บริการ และนโยบายทรัพย์สินทางปัญญาของ AI99 (รับทราบว่าแบบแปลนและพิมพ์เขียวเป็นลิขสิทธิ์เฉพาะ)",
+        "chk2_txt": "2. ข้าพเจ้ายืนยันสละสิทธิ์การขอคืนเงินทุกกรณี 100% หลังเข้าถึงระบบ (เนื่องจากระบบจะส่งมอบสินทรัพย์ดิจิทัลและพิมพ์เขียวให้ทันทีหลังการชำระเงิน)",
         "legal_unlock": "✅ ยืนยันข้อกำหนดครบถ้วน ปลดล็อกท่อชำระเงินสิทธิ์ 4 เดือนเรียบร้อยแล้ว",
         "legal_lock": "กรุณาทำเครื่องหมายติ๊กถูกที่ช่องสี่เหลี่ยม 2 จุดด้านบนให้ครบ เพื่อปลดล็อกระบบชำระเงิน",
         "pay_usd_tab": "💳 บัตรเครดิต/เดบิตสากล (USD)", 
@@ -254,7 +256,8 @@ I18N = {
         "dim_title": "📌 Standard Specifications & Dimensions",
         "dim_w": "Width", "dim_h": "Height", "dim_d": "Depth", "meter": "m",
         "category_txt": "Category", "arch_name": "Architecture Title",
-        "scan_title": "📷 Capture or Upload Your Space",
+        "scan_header": "📷 Scan or Upload Your Actual Space",
+        "scan_desc": "Capture or upload your balcony, room, or garden corner for accurate dimensional computation and equipment fit (Supports JPG, PNG, or Live Camera).",
         "cam_choice": ["Live Camera", "File Upload"],
         "cam_prompt": "Scan your balcony or indoor room corner",
         "upload_prompt": "Upload space image file (JPG, PNG)",
@@ -287,8 +290,9 @@ I18N = {
         "legal_rule1": f"- Grants full access to blueprints, architectural specs, and dimensional layouts for <b>{ACCESS_PERIOD_DAYS} days (Full 4-Month Quarter)</b>",
         "legal_rule2": "- Automatically terminates after 120 days without hidden recurring charges.",
         "legal_rule3": "- System access constitutes immediate and final delivery of digital assets with binding legal enforcement.",
-        "chk1_txt": "1. I accept the AI99 Terms of Service and Intellectual Property Policy.",
-        "chk2_txt": "2. I acknowledge and agree to the 100% Strict Non-Refundable Policy once access is granted.",
+        "legal_notice": "ℹ️ **Pre-Payment Notice:** Please review and accept both mandatory conditions below to unlock the payment gateway for your 120-Day Seasonal Access Pass.",
+        "chk1_txt": "1. I accept the AI99 Terms of Service and Intellectual Property Policy (Acknowledging that all blueprints and spatial designs are proprietary assets).",
+        "chk2_txt": "2. I acknowledge and agree to the 100% Strict Non-Refundable Policy once access is granted (Digital architectural assets and blueprints are delivered immediately upon payment).",
         "legal_unlock": "✅ Terms accepted. Payment gateway for the 4-month pass is unlocked.",
         "legal_lock": "Please accept both mandatory checkboxes above to unlock payment checkout.",
         "pay_usd_tab": "💳 International Card (USD)", 
@@ -319,7 +323,8 @@ I18N = {
         "dim_title": "📌 Standardspezifikationen & Abmessungen",
         "dim_w": "Breite", "dim_h": "Höhe", "dim_d": "Tiefe", "meter": "m",
         "category_txt": "Kategorie", "arch_name": "Architektur-Titel",
-        "scan_title": "📷 Raum fotografieren oder hochladen",
+        "scan_header": "📷 Scannen oder Hochladen Ihres Raumbildes",
+        "scan_desc": "Erfassen oder laden Sie Ihren Balkon, Raum oder Gartenbereich hoch, um präzise Maßberechnungen und Platzierungen zu ermöglichen (Unterstützt JPG, PNG oder Live-Kamera).",
         "cam_choice": ["Live-Kamera", "Datei-Upload"],
         "cam_prompt": "Balkon oder Raumecke scannen",
         "upload_prompt": "Raumbild auswählen (JPG, PNG)",
@@ -352,8 +357,9 @@ I18N = {
         "legal_rule1": f"- Gültig für vollständigen Zugriff auf Baupläne und Raumspezifikationen für <b>{ACCESS_PERIOD_DAYS} Tage (4 volle Monate)</b>",
         "legal_rule2": "- Endet automatisch nach 120 Tagen ohne Folgekosten oder automatische Verlängerung.",
         "legal_rule3": "- Der Systemzugang gilt als vollständige digitale Bereitstellung und ist rechtlich bindend.",
-        "chk1_txt": "1. Ich akzeptiere die AI99-Nutzungsbedingungen und die Richtlinien zum geistigen Eigentum.",
-        "chk2_txt": "2. Ich bestätige den 100%igen Verzicht auf Rückerstattung nach Bereitstellung des Zugangs.",
+        "legal_notice": "ℹ️ **Hinweis vor der Zahlung:** Bitte bestätigen Sie beide untenstehenden Pflichtfelder, um die Zahlungskanäle für Ihren 120-Tage Seasonal Access Pass freizuschalten.",
+        "chk1_txt": "1. Ich akzeptiere die AI99-Nutzungsbedingungen und die Richtlinien zum geistigen Eigentum (Anerkennung der urheberrechtlich geschützten Baupläne).",
+        "chk2_txt": "2. Ich bestätige den 100%igen Verzicht auf Rückerstattung nach Bereitstellung des Zugangs (Digitale Architektur-Assets und Baupläne werden nach der Zahlung sofort freigeschaltet).",
         "legal_unlock": "✅ Bedingungen akzeptiert. Zahlungskanäle für den 4-Monats-Pass freigeschaltet.",
         "legal_lock": "Bitte bestätigen Sie die beiden Pflichtfelder, um die Zahlung freizuschalten.",
         "pay_usd_tab": "💳 Internationale Karte (USD)", 
@@ -778,7 +784,8 @@ with col1:
     st.markdown(CAROUSEL_HTML, unsafe_allow_html=True)
 
 with col2:
-    st.markdown(f"#### {t['scan_title']}")
+    st.markdown(f"#### {t['scan_header']}")
+    st.caption(t['scan_desc'])
     cam_mode = st.radio("Camera Option:", t['cam_choice'], horizontal=True, label_visibility="collapsed")
     if cam_mode == t['cam_choice'][0]:
         st.camera_input(t['cam_prompt'])
@@ -879,6 +886,9 @@ st.markdown(f"""
     {t['legal_rule3']}
 </div>
 """, unsafe_allow_html=True)
+
+# คำชี้แจงนำหน้า 2 ปุ่มมหัศจรรย์
+st.info(t['legal_notice'])
 
 chk1 = st.checkbox(t['chk1_txt'])
 chk2 = st.checkbox(t['chk2_txt'])
