@@ -765,11 +765,11 @@ style_disp_title = current_style["title_th"] if selected_lang == "TH" else (
 
 col1, col2 = st.columns([1, 1])
 
-# รูปภาพ HD ตรงปก 100% ตาม 4 สถาปัตยกรรม (ไม่หลุด ไม่เป็นจอยเกม โหลดเร็ว)
-IMG_BALCONY = "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=500&q=80"
-IMG_MUSHROOM = "https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=500&q=80"
-IMG_INDOOR = "https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=500&q=80"
-IMG_TRELLIS = "https://images.unsplash.com/photo-1558904541-efa8c4a08931?auto=format&fit=crop&w=500&q=80"
+# รูปภาพ HD ตรงปก 100% ตาม 4 สถาปัตยกรรม (ไม่หลุด ไม่เป็นจอยเกม ไม่เป็นทุ่งนา ไม่แตก)
+IMG_BALCONY = "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=600&q=80"
+IMG_MUSHROOM = "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80"
+IMG_INDOOR = "https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=600&q=80"
+IMG_TRELLIS = "https://images.unsplash.com/photo-1558904541-efa8c4a08931?auto=format&fit=crop&w=600&q=80"
 
 c_caps = t["carousel_caps"]
 
