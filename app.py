@@ -9,7 +9,7 @@ from datetime import datetime
 AMAZON_AFFILIATE_TAG = "ybcai99garden-20"
 ACCESS_PERIOD_DAYS = 120  # สิทธิ์เข้าถึง 4 เดือนเต็ม (1 ไตรมาส)
 
-# ลิงก์ท่อรับเงินจริง (Stripe รองรับแยกลิงก์ตามสกุลเงิน หรือใช้ลิงก์หลัก)
+# ลิงก์ท่อรับเงินจริง
 STRIPE_URL_USD = "https://buy.stripe.com/your_actual_stripe_link_usd"
 STRIPE_URL_EUR = "https://buy.stripe.com/your_actual_stripe_link_eur"
 PROMPTPAY_ID = "0812345678"  # เบอร์โทร หรือ PromptPay ID ของพี่ยอด
@@ -20,7 +20,7 @@ PRICING_CONFIG = {
         "symbol": "$",
         "rate": 139.95,
         "format": "$139.95",
-        "multiplier": 1.0,  # ตัวคูณคำนวณอุปกรณ์ BOM
+        "multiplier": 1.0,
         "label": "USD ($139.95)"
     },
     "EUR": {
@@ -37,6 +37,13 @@ PRICING_CONFIG = {
         "multiplier": 36.37,
         "label": "THB (฿5,090)"
     }
+}
+
+# แผนผังผูกภาษาเข้ากับสกุลเงินเริ่มต้นอัตโนมัติ (Language to Currency Mapping)
+LANG_TO_CURR = {
+    "TH": "THB",
+    "EN": "USD",
+    "DE": "EUR"
 }
 
 st.set_page_config(
@@ -141,9 +148,9 @@ I18N = {
         "chk2_txt": "2. ข้าพเจ้ายืนยันสละสิทธิ์การขอคืนเงินทุกกรณี 100% หลังเข้าถึงระบบ (Strict Non-Refundable Clause)",
         "legal_unlock": "✅ ยืนยันข้อกำหนดเรียบร้อย ปลดล็อกท่อชำระเงินสิทธิ์ 4 เดือน",
         "legal_lock": "กรุณาทำเครื่องหมายติ๊กถูก 2 ปุ่มด้านบนให้ครบถ้วน เพื่อปลดล็อกท่อชำระเงิน",
-        "pay_usd_tab": "💳 ชำระผ่านบัตรสากล (USD)",
-        "pay_eur_tab": "💶 ชำระผ่านบัตรสากล (EUR)",
-        "pay_thb_tab": "📱 สแกนพร้อมเพย์ (THB)",
+        "pay_usd_tab": "💳 บัตรเครดิต/เดบิตสากล (USD)",
+        "pay_eur_tab": "💶 บัตรเครดิตยุโรป (EUR)",
+        "pay_thb_tab": "📱 สแกน QR พร้อมเพย์ (THB)",
         "pay_stripe_desc": "ชำระค่าบริการ Seasonal Pass 4 เดือน ผ่านระบบ Stripe มาตรฐานความปลอดภัยระดับโลก",
         "btn_stripe": "🚀 ปลดล็อกสิทธิ์ 4 เดือน",
         "pay_thb_desc": "สแกน QR Code พร้อมเพย์ ชำระตรงเข้าบัญชี",
@@ -314,7 +321,7 @@ def get_amazon_link(keyword):
     return f"https://www.amazon.com/s?k={encoded}&tag={AMAZON_AFFILIATE_TAG}"
 
 # ==========================================================
-# 4. ตัวคุมตรรกะ & ป้อมความปลอดภัย & AI ไกด์นำทัวร์ (รองรับ 3 ภาษา)
+# 4. ตัวคุมตรรกะ AI ไกด์นำทัวร์
 # ==========================================================
 def secure_ai_guide(user_query, active_style_data, lang="TH"):
     now = time.time()
@@ -325,7 +332,7 @@ def secure_ai_guide(user_query, active_style_data, lang="TH"):
     if now - st.session_state.last_request_time < 2.0:
         st.session_state.req_count += 1
         if st.session_state.req_count > 4:
-            if lang == "TH": return "⚠️ ระบบตรวจพบคำขอถี่เกินไป กรุณารอสักครู่เพื่อความปลอดภัยของระบบครับ"
+            if lang == "TH": return "⚠️ ระบบตรวจพบคำขอถี่เกินไป กรุณารอสักครู่เพื่อความปลอดภัยครับ"
             elif lang == "DE": return "⚠️ Zu viele Anfragen in kurzer Zeit. Bitte warten Sie einen Moment."
             else: return "⚠️ Too many requests. Please wait a moment for security verification."
     else:
@@ -335,47 +342,54 @@ def secure_ai_guide(user_query, active_style_data, lang="TH"):
 
     blacklist = ["ignore previous", "hack", "api key", "password", "system prompt", "database", "token", "root"]
     if any(b in user_query.lower() for b in blacklist):
-        if lang == "TH": return "🛡️ ขออภัยครับ ระบบอนุญาตให้สอบถามเฉพาะข้อมูลสถาปัตยกรรมจัดสวนและวิธีใช้งานในหน้านี้เท่านั้น"
-        elif lang == "DE": return "🛡️ Zugriff verweigert: Nur Anfragen zur Gartenarchitektur und Website-Bedienung sind erlaubt."
-        else: return "🛡️ Access restricted: Queries are strictly confined to spatial garden architecture and platform features."
+        if lang == "TH": return "🛡️ ขออภัยครับ ระบบอนุญาตให้สอบถามเฉพาะข้อมูลสถาปัตยกรรมจัดสวนในหน้านี้เท่านั้น"
+        elif lang == "DE": return "🛡️ Zugriff verweigert: Nur Anfragen zur Gartenarchitektur erlaubt."
+        else: return "🛡️ Access restricted: Queries are strictly confined to spatial garden architecture."
 
     q = user_query.lower()
     title = active_style_data["title_th"] if lang == "TH" else (active_style_data["title_de"] if lang == "DE" else active_style_data["title_en"])
     dim = active_style_data["dimensions"]
 
     if any(w in q for w in ["วิธีใช้", "ทำยังไง", "ทัวร์", "start", "how", "anleitung"]):
-        if lang == "TH":
-            return "🚩 **ขั้นตอนง่ายๆ 3 สเต็ป:**\n1. เลือกสไตล์สวนที่ชอบด้านบน แล้วเปิดกล้องถ่ายมุมห้องจริง\n2. เลื่อนลงมาปรับแต่งทรงกระถาง สี และจำนวนชิ้นในตาราง\n3. กดสั่งซื้อของผ่าน Amazon หรือปลดล็อกพิมพ์เขียวเต็มฉบับ 4 เดือนที่ปุ่มด้านล่างได้เลยครับ"
-        elif lang == "DE":
-            return "🚩 **3 einfache Schritte:**\n1. Wählen Sie oben Ihren Gartenstil und scannen Sie den Raum mit der Kamera.\n2. Passen Sie Gefäßform, Farbe und Stückzahlen in der Tabelle an.\n3. Bestellen Sie Ausrüstung via Amazon oder schalten Sie den 4-Monats-Bauplan unten frei."
-        else:
-            return "🚩 **3 Quick Steps:**\n1. Select your desired archetype and scan your physical space.\n2. Customize planter forms, colors, and quantities in the BOM table.\n3. Order kit via Amazon or unlock the full 4-Month Seasonal Blueprint below."
+        if lang == "TH": return "🚩 **ขั้นตอนง่ายๆ 3 สเต็ป:**\n1. เลือกสไตล์สวนด้านบน แล้วเปิดกล้องถ่ายมุมห้องจริง\n2. เลื่อนลงมาปรับแต่งทรงกระถาง สี และจำนวนชิ้นในตาราง\n3. กดสั่งซื้ออุปกรณ์ผ่าน Amazon หรือปลดล็อกพิมพ์เขียว 4 เดือนที่ปุ่มด้านล่างครับ"
+        elif lang == "DE": return "🚩 **3 einfache Schritte:**\n1. Stil oben wählen und Raum mit Kamera scannen.\n2. Gefäßform, Farbe und Stückzahlen anpassen.\n3. Ausrüstung über Amazon bestellen oder 4-Monats-Bauplan freischalten."
+        else: return "🚩 **3 Quick Steps:**\n1. Select style and scan space.\n2. Customize planter forms and quantities.\n3. Order kit via Amazon or unlock the 4-Month Seasonal Blueprint below."
 
     elif any(w in q for w in ["ขนาด", "พื้นที่", "กว้าง", "dim", "size", "fläche", "maße"]):
         return f"📐 **{title}** -> {dim['width']}m x {dim['height']}m x {dim['depth']}m"
 
     elif any(w in q for w in ["กระถาง", "สลับ", "เปลี่ยน", "pot", "planter", "topf"]):
-        if lang == "TH": return "💡 สามารถเลือกทรงกระถางและโทนสีได้ในแผงข้อ 2 ลิงก์ค้นหา Amazon จะปรับให้ตรงรุ่นอัตโนมัติครับ"
-        elif lang == "DE": return "💡 Passen Sie Gefäßform und Farbe in Schritt 2 an. Die Amazon-Suchlinks aktualisieren sich automatisch."
-        else: return "💡 Adjust planter forms and textures in Step 2. Amazon catalog search queries will update dynamically."
+        if lang == "TH": return "💡 ปรับทรงกระถางและสีได้ในสเต็ป 2 ลิงก์ค้นหา Amazon จะปรับตรงรุ่นให้อัตโนมัติครับ"
+        elif lang == "DE": return "💡 Passen Sie Gefäßform und Farbe in Schritt 2 an. Amazon-Links aktualisieren sich automatisch."
+        else: return "💡 Adjust planter forms in Step 2. Amazon catalog search queries will update dynamically."
 
     elif any(w in q for w in ["อายุ", "4 เดือน", "ราคา", "pass", "price", "preis"]):
         return f"💳 Seasonal Pass: $139.95 USD / €129.00 EUR / ฿5,090 THB ({ACCESS_PERIOD_DAYS} Days full access)"
 
     else:
-        if lang == "TH": return f"🌿 AI ไกด์พร้อมช่วยเหลือครับ สำหรับสไตล์ **{title}** สามารถปรับแต่งชิ้นส่วนอุปกรณ์ได้ที่ตารางด้านล่างเลยครับ"
-        elif lang == "DE": return f"🌿 AI-Guide bereit. Für **{title}** können Sie die Ausrüstungsliste unten individuell konfigurieren."
-        else: return f"🌿 AI Guide standing by. You can configure individual BOM units for **{title}** in the table below."
+        if lang == "TH": return f"🌿 AI ไกด์พร้อมช่วยเหลือครับ สำหรับสไตล์ **{title}** สามารถปรับแต่งอุปกรณ์ได้ที่ตารางด้านล่างเลยครับ"
+        elif lang == "DE": return f"🌿 AI-Guide bereit. Für **{title}** können Sie die Ausrüstung unten anpassen."
+        else: return f"🌿 AI Guide standing by. Configure individual BOM units for **{title}** below."
 
 # ==========================================================
-# 5. แถบข้าง (SIDEBAR): เลือกลิ้นภาษา & สกุลเงิน & AI ไกด์
+# 5. ระบบ Session State & Auto-Sync (ภาษาพ่วงสกุลเงิน)
 # ==========================================================
+if "user_lang" not in st.session_state:
+    st.session_state.user_lang = "TH"
+if "user_curr" not in st.session_state:
+    st.session_state.user_curr = "THB"
+
+def on_lang_change():
+    # เมื่อคลิกเปลี่ยนภาษา สกุลเงินจะดีดเปลี่ยนตามทันที
+    st.session_state.user_curr = LANG_TO_CURR[st.session_state.user_lang]
+
 with st.sidebar:
     st.markdown("### 🌐 เลือกภาษา / Language / Sprache")
     selected_lang = st.radio(
         "Language Selection:",
         ["TH", "EN", "DE"],
-        index=0,
+        key="user_lang",
+        on_change=on_lang_change,
         horizontal=True,
         label_visibility="collapsed"
     )
@@ -384,10 +398,11 @@ with st.sidebar:
     st.markdown("---")
     st.markdown("### 💱 สกุลเงินชำระ / Currency")
     currency_keys = list(PRICING_CONFIG.keys())
+    
     selected_currency_key = st.radio(
         "Currency Selector:",
         currency_keys,
-        index=0,
+        key="user_curr",
         format_func=lambda x: PRICING_CONFIG[x]["label"],
         horizontal=False
     )
@@ -432,7 +447,7 @@ with st.sidebar:
     
     st.markdown("---")
     st.caption(f"Affiliate Tag: `{AMAZON_AFFILIATE_TAG}`")
-    st.caption(f"Active Currency: **{curr['label']}**")
+    st.caption(f"Active Sync: **{selected_lang} ➔ {selected_currency_key}**")
 
 # ==========================================================
 # 6. ส่วนหัวของเว็บ (HEADER)
@@ -491,7 +506,7 @@ with col2:
 st.markdown("---")
 
 # ==========================================================
-# 8. สเต็ปที่ 2: แผงปรับแต่งสินค้า (INTERACTIVE BOM CUSTOMIZER)
+# 8. สเต็ปที่ 2: แผงปรับแต่งสินค้า (BOM CUSTOMIZER)
 # ==========================================================
 st.markdown(f"### {t['step2_title']}")
 
@@ -522,7 +537,6 @@ for item in current_style["default_items"]:
         if item["id"] in ["planter", "pots", "hook_pots"]:
             item_name = f"{item_name} [{pot_shape.split(' ')[0]} - {pot_color.split(' ')[0]}]"
         
-        # คำนวณราคาต่อหน่วยตามสกุลเงินที่เลือก
         unit_price = item["price_usd"] * curr["multiplier"]
         st.write(f"**{item_name}**")
         st.caption(f"{t['est_price']}: {curr['symbol']}{unit_price:,.2f}")
@@ -551,10 +565,9 @@ for item in current_style["default_items"]:
 st.markdown("---")
 
 # ==========================================================
-# 9. สเต็ปที่ 3: สรุปยอด & ท่อรับเงินจริง 3 สกุลเงิน
+# 9. สเต็ปที่ 3: สรุปยอด & ท่อรับเงิน (จัดแท็บตามภาษาอัตโนมัติ)
 # ==========================================================
 col_sum, col_buy = st.columns([1, 1])
-
 total_converted = total_estimated_base * curr["multiplier"]
 
 with col_sum:
@@ -566,7 +579,7 @@ with col_buy:
     st.link_button(t['btn_buy_all'], get_amazon_link(search_all), use_container_width=True)
 
 # ----------------------------------------------------------
-# ส่วนสัญญา 2 ปุ่ม และท่อชำระเงินตามสกุลเงินที่เลือก
+# ส่วนสัญญา 2 ปุ่มมหัศจรรย์ และแท็บชำระเงินเรียงตามภาษา
 # ----------------------------------------------------------
 st.markdown(f"""
 <div class='legal-box'>
@@ -583,22 +596,31 @@ chk2 = st.checkbox(t['chk2_txt'])
 if chk1 and chk2:
     st.success(t['legal_unlock'])
     
-    # แท็บชำระเงินรองรับครบทั้ง 3 สกุลเงิน
-    tab_usd, tab_eur, tab_thb = st.tabs([
-        f"{t['pay_usd_tab']} - $139.95", 
-        f"{t['pay_eur_tab']} - €129.00", 
-        f"{t['pay_thb_tab']} - ฿5,090"
-    ])
-    
-    with tab_usd:
+    # เรียงลำดับแท็บชำระเงินให้แท็บแรกตรงกับภาษาที่เลือกอัตโนมัติ
+    if selected_lang == "TH":
+        tab1, tab2, tab3 = st.tabs([f"{t['pay_thb_tab']} - ฿5,090", f"{t['pay_usd_tab']} - $139.95", f"{t['pay_eur_tab']} - €129.00"])
+        active_tab_order = ["THB", "USD", "EUR"]
+    elif selected_lang == "DE":
+        tab1, tab2, tab3 = st.tabs([f"{t['pay_eur_tab']} - €129.00", f"{t['pay_usd_tab']} - $139.95", f"{t['pay_thb_tab']} - ฿5,090"])
+        active_tab_order = ["EUR", "USD", "THB"]
+    else:
+        tab1, tab2, tab3 = st.tabs([f"{t['pay_usd_tab']} - $139.95", f"{t['pay_eur_tab']} - €129.00", f"{t['pay_thb_tab']} - ฿5,090"])
+        active_tab_order = ["USD", "EUR", "THB"]
+
+    tab_map = {active_tab_order[0]: tab1, active_tab_order[1]: tab2, active_tab_order[2]: tab3}
+
+    # แท็บ USD
+    with tab_map["USD"]:
         st.write(t['pay_stripe_desc'])
         st.link_button(f"{t['btn_stripe']} ($139.95 USD / 4 Months)", STRIPE_URL_USD, use_container_width=True)
-        
-    with tab_eur:
+
+    # แท็บ EUR
+    with tab_map["EUR"]:
         st.write(t['pay_stripe_desc'])
         st.link_button(f"{t['btn_stripe']} (€129.00 EUR / 4 Monate)", STRIPE_URL_EUR, use_container_width=True)
-        
-    with tab_thb:
+
+    # แท็บ THB
+    with tab_map["THB"]:
         st.write(f"{t['pay_thb_desc']} ยอดชำระ: **฿5,090 บาท** (สิทธิ์ 4 เดือนเต็ม)")
         qr_code_url = f"https://promptpay.io/{PROMPTPAY_ID}/5090.png"
         col_q, col_s = st.columns([1, 1])
