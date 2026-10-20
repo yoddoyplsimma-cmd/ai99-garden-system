@@ -122,7 +122,6 @@ st.markdown("""
         border: 1px solid #334155;
         display: inline-block;
     }
-    /* บังคับขนาดภาพถ่ายและภาพเรนเดอร์ให้สูงเท่ากันเป๊ะ ไม่มียืดยาว */
     .fixed-img-container {
         width: 100%;
         height: 320px;
@@ -140,7 +139,6 @@ st.markdown("""
         height: 100%;
         object-fit: cover !important;
     }
-    /* หัวตาราง Master BOM สไตล์ Enterprise Grid */
     .bom-header-bar {
         background: #1E293B;
         border: 1px solid #334155;
@@ -662,7 +660,7 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # ==============================================================================
-# SECTION 8: STEP 1 - DUAL SCREEN COMPARISON (ล็อกความสูงเท่ากัน + โชว์ปุ่มรัน AI เสมอ)
+# SECTION 8: STEP 1 - DUAL SCREEN COMPARISON (จอคู่เปรียบเทียบคลีน 100%)
 # ==============================================================================
 st.markdown(f"### {t['step1_title']}")
 
@@ -720,18 +718,12 @@ with col_screen_right:
     uploaded_file = st.file_uploader(t['upload_prompt'], type=["jpg", "png", "jpeg", "webp", "JPG", "PNG"])
 
     if uploaded_file is not None:
-        # แสดงภาพในคอนเทนเนอร์ที่ล็อกขนาดความสูงเท่ากับช่องซ้าย
-        st.markdown(f"""
-        <div class='fixed-img-container'>
-            <img src='data:image/png;base64,{urllib.parse.quote(uploaded_file.getvalue()) if False else ""}' id='user_uploaded_preview'>
-        </div>
-        """, unsafe_allow_html=True)
-        st.image(uploaded_file, use_container_width=True)
+        st.image(uploaded_file, caption="มุมบ้านจริงของคุณ (พร้อมนำไปวิเคราะห์มิติ)", use_container_width=True)
         
-        # ปุ่มรัน AI โชว์เสมอ ไม่ซ่อน เพื่อให้ลูกค้ารู้ว่าต้องทำอะไรต่อ
+        # ปุ่มรัน AI โชว์ต่อเนื่องสวยงาม
         if st.button(t['confirm_ai_btn'], use_container_width=True):
             if st.session_state.is_member_unlocked:
-                with st.spinner("3-Core AI กำลังวิเคราะห์แสงแดด สแกนมิติ และจัดวางอุปกรณ์เสมือนจริง..."):
+                with st.spinner("3-Core AI กำลังวิเคราะห์มุมระนาบ แสงแดด และสแกนมิติพื้นที่..."):
                     time.sleep(2)
                     st.session_state.ai_rendered_ready = True
                     st.success("✅ ประมวลผลมิติสำเร็จ! ระบบจัดวางชิ้นส่วนลงในตารางด้านล่างแล้ว")
