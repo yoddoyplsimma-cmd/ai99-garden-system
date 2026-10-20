@@ -54,7 +54,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom Styling สไตล์มินิมอลโมเดิร์น + แถบภาพวิ่งอัตโนมัติคลีนๆ ไร้คำบรรยาย (Pure Image Carousel)
+# Custom Styling สไตล์มินิมอลโมเดิร์น + แถบภาพวิ่งอัตโนมัติคลีนๆ ไร้ตัวหนังสือบดบัง (Clean Infinite Flow)
 st.markdown("""
 <head>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -123,7 +123,7 @@ st.markdown("""
         color: #1E293B;
         line-height: 1.5;
     }
-    /* Infinite Pure Image Carousel Styling (ไม่มีตัวหนังสือ) */
+    /* Infinite Pure Image Carousel Styling */
     .carousel-track-container {
         overflow: hidden;
         width: 100%;
@@ -738,11 +738,11 @@ style_disp_title = current_style["title_th"] if selected_lang == "TH" else (
 
 col1, col2 = st.columns([1, 1])
 
-# ชุดรูปภาพ 4 สไตล์ตรงรุ่น 100% คมชัด โหลดเร็ว (ไม่มีตัวหนังสือวิ่งบดบัง คลีนๆ สวยงาม)
-IMG_BALCONY = "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=600&q=80"
-IMG_MUSHROOM = "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80"
-IMG_INDOOR = "https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=600&q=80"
-IMG_TRELLIS = "https://images.unsplash.com/photo-1558904541-efa8c4a08931?auto=format&fit=crop&w=600&q=80"
+# ชุดรูปภาพ 4 แนวตรงรุ่น 100% จากโฟลเดอร์ 'รวม' ใน Google Drive ของพี่ยอด
+IMG_BALCONY = "https://lh3.googleusercontent.com/d/1y3A2kCG-JhqbysqN6e0M5aG4iiG3HRdD"
+IMG_MUSHROOM = "https://lh3.googleusercontent.com/d/1xcOBnsLuCZBM7gVe8XURQqrlnP7-R-pO"
+IMG_INDOOR = "https://lh3.googleusercontent.com/d/1-8q8l4pGELAYp0_tn6Z387aq9XclS_3p"
+IMG_TRELLIS = "https://lh3.googleusercontent.com/d/1AjZgaGwLXlwB7neIQLvUmLmYR3-b3YJF"
 
 CAROUSEL_HTML = f"""
 <div class="carousel-track-container">
