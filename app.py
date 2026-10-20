@@ -13,7 +13,7 @@ ACCESS_PERIOD_DAYS = 120  # สิทธิ์เข้าถึงระบบ 
 # ท่อชำระเงินจริงสำหรับ Seasonal Access Pass
 STRIPE_URL_USD = "https://buy.stripe.com/your_actual_stripe_link_usd"
 STRIPE_URL_EUR = "https://buy.stripe.com/your_actual_stripe_link_eur"
-PROMPTPAY_ID = "0812345678"  # PromptPay ID / เบอร์โทรของพี่ยอด
+PROMPTPAY_ID = "0812345678"  # PromptPay ID บัญชีพี่ยอด CEO
 
 # โครงสร้างราคาและอัตราแปลงสกุลเงินคงที่ (Fixed Production Rates)
 PRICING_CONFIG = {
@@ -123,14 +123,6 @@ st.markdown("""
         color: #1E293B;
         line-height: 1.5;
     }
-    .metric-card {
-        background-color: #FFFFFF;
-        border: 1px solid #E2E8F0;
-        padding: 16px;
-        border-radius: 10px;
-        border-left: 4px solid #1B4D3E;
-        margin-bottom: 12px;
-    }
     /* Infinite Smooth Carousel Styling */
     .carousel-track-container {
         overflow: hidden;
@@ -211,9 +203,9 @@ I18N = {
         "upload_prompt": "เลือกไฟล์ภาพพื้นที่มุมบ้าน (JPG, PNG)",
         "carousel_caps": [
             "🌿 สวนผักสลัดแนวตั้งระเบียงคอนโด",
-            "🍄 สมาร์ทฟังกิพอด ตู้เห็ดในร่ม",
+            "🍄 สมาร์ทฟังกิพอด ตู้เห็ดในร่มกินได้",
             "🪴 ชั้นวางไม้และไฟปลูกห้องรับแขก",
-            "🏡 สวนระแนงแนวตั้งหน้าบ้าน"
+            "🏡 แผงสวนแนวตั้งระแนงหน้าบ้าน"
         ],
         "step2_title": "2. ปรับแต่งรูปทรง สี และจำนวนอุปกรณ์ (Interactive Customizer)",
         "pot_shape_label": "เลือกรูปทรงกระถาง / รางปลูก (Planter Style):",
@@ -773,7 +765,7 @@ style_disp_title = current_style["title_th"] if selected_lang == "TH" else (
 
 col1, col2 = st.columns([1, 1])
 
-# รูปภาพตรงตามสถาปัตยกรรมจริงทั้ง 4 หมวด 100% ไม่หลุด ไม่แตก โหลดเร็ว
+# รูปภาพ HD ตรงปก 100% ตาม 4 สถาปัตยกรรม (ไม่หลุด ไม่เป็นจอยเกม โหลดเร็ว)
 IMG_BALCONY = "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=500&q=80"
 IMG_MUSHROOM = "https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=500&q=80"
 IMG_INDOOR = "https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=500&q=80"
