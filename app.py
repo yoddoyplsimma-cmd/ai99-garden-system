@@ -53,7 +53,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom Styling สไตล์คลีนโมเดิร์นสีขาว + แอนิเมชันสไลด์ภาพไหลวน
+# Custom Styling สไตล์คลีนโมเดิร์นสีขาว + Infinite Smooth Carousel
 st.markdown("""
     <style>
     .stApp { background-color: #FAFAFA; }
@@ -142,6 +142,9 @@ st.markdown("""
         text-align: center;
         margin-top: 6px;
         font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     @keyframes scroll-left {
         0% { transform: translateX(0); }
@@ -151,7 +154,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ==========================================================
-# 2. พจนานุกรม 3 ภาษา (TH / EN / DE) สมบูรณ์แบบ
+# 2. พจนานุกรม 3 ภาษา (TH / EN / DE)
 # ==========================================================
 I18N = {
     "TH": {
@@ -663,7 +666,7 @@ st.markdown(f"<div class='main-title'>{t['title']}</div>", unsafe_allow_html=Tru
 st.markdown(f"<div class='sub-title'>{t['subtitle']}</div>", unsafe_allow_html=True)
 
 # ==========================================================
-# 7. สเต็ปที่ 1: เลือกสไตล์และสแกนพื้นที่ (พร้อม Infinite Carousel)
+# 7. สเต็ปที่ 1: เลือกสไตล์และสแกนพื้นที่ (Carousel ไดนามิก 3 ภาษาแท้)
 # ==========================================================
 st.markdown(f"### {t['step1_title']}")
 
@@ -691,42 +694,31 @@ style_disp_title = current_style["title_th"] if selected_lang == "TH" else (
 
 col1, col2 = st.columns([1, 1])
 
-# โค้ด HTML แบนเนอร์ภาพไหลวนอัตโนมัติ สวย คลีน ไม่สะดุด
-CAROUSEL_HTML = """
+# กำหนดข้อความบรรยายใต้ภาพให้เปลี่ยนตามภาษาที่เลือกจริงแบบ 100%
+if selected_lang == "EN":
+    cap1, cap2, cap3, cap4 = "🌿 Vertical Balcony Garden", "🍄 Smart Mushroom Chamber", "🪴 Living Room Green Shelf", "🏡 Front Yard Trellis Wall"
+elif selected_lang == "DE":
+    cap1, cap2, cap3, cap4 = "🌿 Vertikaler Balkongarten", "🍄 Smarte Pilzkammer", "🪴 Wohnzimmer Pflanzenregal", "🏡 Vorgarten Spaliersystem"
+else:
+    cap1, cap2, cap3, cap4 = "🌿 สวนแนวตั้งระเบียงคอนโด", "🍄 ตู้เห็ดอัจฉริยะในร่ม", "🪴 ชั้นวางไม้ห้องนั่งเล่น", "🏡 สวนระแนงหน้าบ้าน"
+
+# ชุดรูปภาพตรงสเปก โหลดเร็ว ไม่ติดบล็อก และไม่แตก
+img1 = "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=500&q=80"
+img2 = "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=500&q=80"
+img3 = "https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=500&q=80"
+img4 = "https://images.unsplash.com/photo-1558904541-efa8c4a08931?auto=format&fit=crop&w=500&q=80"
+
+CAROUSEL_HTML = f"""
 <div class="carousel-track-container">
     <div class="carousel-track">
-        <div class="carousel-slide">
-            <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=500&q=80" alt="Vertical Garden">
-            <div class="carousel-caption">🌿 สวนแนวตั้งระเบียงคอนโด</div>
-        </div>
-        <div class="carousel-slide">
-            <img src="https://images.unsplash.com/photo-1592417817098-8f3d69104a47?w=500&q=80" alt="Mushroom Pod">
-            <div class="carousel-caption">🍄 ตู้เห็ดอัจฉริยะในร่ม</div>
-        </div>
-        <div class="carousel-slide">
-            <img src="https://images.unsplash.com/photo-1545241047-6083a3684587?w=500&q=80" alt="Living Plant Shelf">
-            <div class="carousel-caption">🪴 ชั้นวางไม้ห้องนั่งเล่น</div>
-        </div>
-        <div class="carousel-slide">
-            <img src="https://images.unsplash.com/photo-1558904541-efa8c4a08931?w=500&q=80" alt="Entrance Green Wall">
-            <div class="carousel-caption">🏡 สวนระแนงหน้าบ้าน</div>
-        </div>
-        <div class="carousel-slide">
-            <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=500&q=80" alt="Vertical Garden">
-            <div class="carousel-caption">🌿 สวนแนวตั้งระเบียงคอนโด</div>
-        </div>
-        <div class="carousel-slide">
-            <img src="https://images.unsplash.com/photo-1592417817098-8f3d69104a47?w=500&q=80" alt="Mushroom Pod">
-            <div class="carousel-caption">🍄 ตู้เห็ดอัจฉริยะในร่ม</div>
-        </div>
-        <div class="carousel-slide">
-            <img src="https://images.unsplash.com/photo-1545241047-6083a3684587?w=500&q=80" alt="Living Plant Shelf">
-            <div class="carousel-caption">🪴 ชั้นวางไม้ห้องนั่งเล่น</div>
-        </div>
-        <div class="carousel-slide">
-            <img src="https://images.unsplash.com/photo-1558904541-efa8c4a08931?w=500&q=80" alt="Entrance Green Wall">
-            <div class="carousel-caption">🏡 สวนระแนงหน้าบ้าน</div>
-        </div>
+        <div class="carousel-slide"><img src="{img1}"><div class="carousel-caption">{cap1}</div></div>
+        <div class="carousel-slide"><img src="{img2}"><div class="carousel-caption">{cap2}</div></div>
+        <div class="carousel-slide"><img src="{img3}"><div class="carousel-caption">{cap3}</div></div>
+        <div class="carousel-slide"><img src="{img4}"><div class="carousel-caption">{cap4}</div></div>
+        <div class="carousel-slide"><img src="{img1}"><div class="carousel-caption">{cap1}</div></div>
+        <div class="carousel-slide"><img src="{img2}"><div class="carousel-caption">{cap2}</div></div>
+        <div class="carousel-slide"><img src="{img3}"><div class="carousel-caption">{cap3}</div></div>
+        <div class="carousel-slide"><img src="{img4}"><div class="carousel-caption">{cap4}</div></div>
     </div>
 </div>
 """
@@ -747,7 +739,7 @@ with col1:
     </div>
     """, unsafe_allow_html=True)
     
-    # วางภาพไหลวนใต้การ์ดสเปกมิติ เติมเต็มพื้นที่ว่างให้สวยงาม
+    # วางภาพไหลวนใต้การ์ดสเปกมิติ
     st.markdown(CAROUSEL_HTML, unsafe_allow_html=True)
 
 with col2:
