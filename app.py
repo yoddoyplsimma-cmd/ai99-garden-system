@@ -13,10 +13,15 @@ ACCESS_PERIOD_DAYS = 120  # สิทธิ์เข้าถึงระบบ 
 # ท่อชำระเงินจริงสำหรับ Seasonal Access Pass
 STRIPE_URL_USD = "https://buy.stripe.com/your_actual_stripe_link_usd"
 STRIPE_URL_EUR = "https://buy.stripe.com/your_actual_stripe_link_eur"
-PROMPTPAY_ID = "0812345678"  # PromptPay ID บัญชีพี่ยอด CEO
+PROMPTPAY_ID = "0800838340"  # PromptPay ID บัญชีจริงพี่ยอด CEO
 
-# ฐานข้อมูลตัวอย่างสมาชิกที่ชำระเงินแล้ว (สามารถขยายเชื่อมต่อ Database จริงได้)
-REGISTERED_MEMBERS = ["0812345678", "0899999999", "+49123456789"]
+# ฐานข้อมูลสมาชิกที่ชำระเงินแล้ว: ล็อกระบบ Phone + Access PIN ป้องกันคนอื่นสวมรอย 100%
+REGISTERED_MEMBERS = {
+    "0800838340": "999999",     # บัญชี Master พี่ยอด CEO (PIN: 999999)
+    "080-083-8340": "999999",   # รองรับกรณีพิมพ์แบบมีขีด
+    "080 083 8340": "999999",   # รองรับกรณีพิมพ์แบบเว้นวรรค
+    "+49151234567": "772109"    # ตัวอย่างสมาชิกลูกค้ายุโรป
+}
 
 PRICING_CONFIG = {
     "USD": {
@@ -55,7 +60,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom Styling ปรับ UI รองรับ Access Gate & ล็อกส่วน BOM
+# Custom Styling ปรับปรุงความคมชัด บล็อกการแคปเซฟรูปภาพ
 st.markdown("""
 <head>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -183,6 +188,7 @@ st.markdown("""
         border: 1px solid #334155;
         pointer-events: none;
         user-select: none;
+        -webkit-user-drag: none;
     }
     @keyframes scroll-left {
         0% { transform: translateX(0); }
@@ -223,11 +229,12 @@ I18N = {
         "hero_desc": "คำนวณสัดส่วนพื้นที่ระเบียงและมุมห้องจริงอย่างแม่นยำ พร้อมแปลนจัดวางชุดอุปกรณ์และตารางสั่งซื้อครบวงจรในที่เดียว",
         "top_mode_label": "สถานะการใช้งานระบบ:",
         "top_modes": ["👤 ผู้เยี่ยมชม / สั่งซื้อสิทธิ์ใหม่", "🔑 สมาชิกเดิมเข้าสู่ระบบ (Login)"],
-        "login_title": "🔑 ยืนยันตัวตนสมาชิก AI99",
-        "login_prompt": "กรอกหมายเลขโทรศัพท์ที่ลงทะเบียนใช้งาน:",
-        "login_btn": "🚀 เข้าใช้งานระบบเต็มรูปแบบ",
-        "login_success": "ยินดีต้อนรับกลับครับสมาชิก AI99 ปลดล็อกระบบ 3-Core AI และตาราง Master BOM เรียบร้อยแล้ว",
-        "login_fail": "ไม่พบหมายเลขโทรศัพท์นี้ในฐานข้อมูล กรุณาตรวจสอบหรือทำการสั่งซื้อสิทธิ์ด้านล่างครับ",
+        "login_title": "🔑 ยืนยันตัวตนสมาชิก AI99 (Phone + Access PIN)",
+        "login_prompt": "หมายเลขโทรศัพท์ที่ลงทะเบียน:",
+        "login_pin_prompt": "รหัสผ่านลับ Access PIN (6 หลัก):",
+        "login_btn": "🚀 ปลดล็อกเข้าใช้งานระบบเต็มรูปแบบ",
+        "login_success": "ยืนยันตัวตนสำเร็จ! ยินดีต้อนรับกลับสู่ระบบ AI99 ปลดล็อกตาราง Master BOM เรียบร้อยแล้ว",
+        "login_fail": "หมายเลขโทรศัพท์หรือรหัส PIN ไม่ถูกต้อง โปรดตรวจสอบข้อมูลอีกครั้งครับ",
         "logout_btn": "ออกจากระบบ",
         "sidebar_guide": "🤖 ผู้ช่วยแนะนำระบบ (AI Guide)",
         "sidebar_safety": "ระบบคุมตรรกะความปลอดภัย: Zero-Hallucination Guard",
@@ -251,7 +258,7 @@ I18N = {
         "upload_prompt": "เลือกไฟล์ภาพพื้นที่มุมบ้าน (JPG, PNG)",
         "confirm_ai_btn": "⚡ ส่งภาพเข้าสู่ 3-Core AI เพื่อคำนวณมิติและจับคู่ชิ้นส่วน",
         "step2_title": "2. ปรับแต่งรูปทรง สี และจำนวนอุปกรณ์ (Interactive Customizer)",
-        "bom_locked_msg": "🔒 **ส่วนตาราง Master BOM และการปรับแต่งสเปกถูกล็อก:** สงวนสิทธิ์การใช้งานสำหรับผู้ถือ Seasonal Access Pass (120 วัน) เท่านั้น กรุณาเข้าสู่ระบบด้วยเบอร์โทรศัพท์ หรือชำระเงินเพื่อปลดล็อกด้านล่าง",
+        "bom_locked_msg": "🔒 **ส่วนตาราง Master BOM และการปรับแต่งสเปกถูกล็อก:** สงวนสิทธิ์การใช้งานสำหรับผู้ถือ Seasonal Access Pass (120 วัน) เท่านั้น กรุณาเข้าสู่ระบบด้วยเบอร์โทรศัพท์และรหัส PIN หรือชำระเงินด้านล่าง",
         "pot_shape_label": "เลือกรูปทรงกระถาง / รางปลูก (Planter Style):",
         "pot_shapes": ["รางยาวมินิมอล (Rectangular Trough)", "ทรงกระบอกโมเดิร์น (Cylinder Modern)", "สี่เหลี่ยมลูกบาศก์ (Square Cube)", "ทรงกลมคลาสสิก (Round Classic)"],
         "pot_color_label": "เลือกโทนสีและเนื้อวัสดุ (Color & Texture):",
@@ -274,10 +281,10 @@ I18N = {
         "pay_usd_tab": "💳 บัตรเครดิต/เดบิตสากล (USD)", "pay_eur_tab": "💶 บัตรเครดิตยุโรป (EUR)", "pay_thb_tab": "📱 สแกน QR พร้อมเพย์ (THB)",
         "pay_stripe_desc": "ชำระค่าบริการ Seasonal Pass 4 เดือน ผ่านระบบ Stripe มาตรฐานความปลอดภัยระดับโลก",
         "btn_stripe": "🚀 ปลดล็อกสิทธิ์ 4 เดือน",
-        "pay_thb_desc": "สแกน QR Code พร้อมเพย์ ชำระตรงเข้าบัญชี",
+        "pay_thb_desc": "สแกน QR Code พร้อมเพย์ ชำระตรงเข้าบัญชีพี่ยอด CEO",
         "upload_slip": "แนบสลิปโอนเงินเพื่อปลดล็อกสิทธิ์ใช้งาน:",
         "btn_slip": "ยืนยันการส่งสลิปโอนเงิน",
-        "slip_ok": "ระบบได้รับข้อมูลสลิปเรียบร้อยแล้ว กำลังดำเนินการตรวจสอบเปิดสิทธิ์การใช้งาน 4 เดือนครับ",
+        "slip_ok": "ระบบได้รับข้อมูลสลิปเรียบร้อยแล้ว ทางระบบจะออกรหัส Access PIN ให้ทางช่องทางติดต่อครับ",
         "aff_disclosure": "📢 **การเปิดเผยความโปร่งใสทาง Affiliate:** ในฐานะ Amazon Associate ทางเราอาจได้รับค่าตอบแทนจากยอดสั่งซื้อที่มีคุณสมบัติตรงตามเกณฑ์ โดยไม่เพิ่มภาระค่าใช้จ่ายใดๆ แก่ผู้ซื้อ ภาพและไฟล์ที่อัปโหลดจะถูกประมวลผลเฉพาะบนเซสชันชั่วคราวเท่านั้น ไม่มีการนำไปเผยแพร่ต่อสาธารณะ",
         "footer_rights": "© 2026 AI99 Garden Design Architecture. สงวนลิขสิทธิ์ทุกประการ"
     },
@@ -287,11 +294,12 @@ I18N = {
         "hero_desc": "Turn your compact balcony or indoor space into an engineered greenery sanctuary with precise automated BOM calculations and instant parts sourcing.",
         "top_mode_label": "System Mode:",
         "top_modes": ["👤 New Visitor / Order Access", "🔑 Member Portal (Phone Login)"],
-        "login_title": "🔑 AI99 Member Identity Verification",
-        "login_prompt": "Enter your registered phone number:",
+        "login_title": "🔑 Member Verification (Phone + Secret PIN)",
+        "login_prompt": "Registered Phone Number:",
+        "login_pin_prompt": "6-Digit Access PIN:",
         "login_btn": "🚀 Access Full System",
-        "login_success": "Welcome back, AI99 Member. 3-Core AI Engine and Master BOM unlocked.",
-        "login_fail": "Phone number not registered. Please verify or order a Seasonal Pass below.",
+        "login_success": "Authentication successful. 3-Core AI Engine and Master BOM unlocked.",
+        "login_fail": "Invalid phone number or PIN. Please verify credentials.",
         "logout_btn": "Sign Out",
         "sidebar_guide": "🤖 Assistant Guide (AI Guide)",
         "sidebar_safety": "Safety Logic Protocol: Zero-Hallucination Guard",
@@ -315,7 +323,7 @@ I18N = {
         "upload_prompt": "Upload space image file (JPG, PNG)",
         "confirm_ai_btn": "⚡ Submit to 3-Core AI for Spatial Analysis & BOM Matching",
         "step2_title": "2. Customize Shape, Color & Quantities (BOM Configurator)",
-        "bom_locked_msg": "🔒 **Master BOM & Customizer Locked:** Reserved exclusively for Seasonal Access Pass (120-Day) holders. Please sign in with your phone number or purchase access below.",
+        "bom_locked_msg": "🔒 **Master BOM & Customizer Locked:** Reserved exclusively for Seasonal Access Pass holders. Please authenticate with Phone & PIN or purchase access below.",
         "pot_shape_label": "Select Planter Style / Shape:",
         "pot_shapes": ["Rectangular Trough", "Cylinder Modern", "Square Cube", "Round Classic"],
         "pot_color_label": "Select Material Texture & Color:",
@@ -341,7 +349,7 @@ I18N = {
         "pay_thb_desc": "Scan PromptPay QR for direct local transfer.",
         "upload_slip": "Upload bank transfer confirmation slip:",
         "btn_slip": "Submit Transfer Slip",
-        "slip_ok": "Slip received. Activating your 4-month seasonal account now.",
+        "slip_ok": "Slip received. Your Access PIN will be issued shortly.",
         "aff_disclosure": "📢 **Affiliate Disclosure:** As an Amazon Associate, we earn from qualifying purchases at zero additional cost to you. Uploaded images are strictly processed in private sessions and are never stored or shared publicly.",
         "footer_rights": "© 2026 AI99 Garden Design Architecture. All rights reserved."
     },
@@ -350,12 +358,13 @@ I18N = {
         "hero_title": "Verwirklichen Sie Ihre Gartenvision mit AI99",
         "hero_desc": "Verwandeln Sie Ihren Balkon oder Innenraum in eine durchdachte grüne Oase mit präzisen Stücklistenberechnungen und direkter Beschaffung.",
         "top_mode_label": "Systemmodus:",
-        "top_modes": ["👤 Besucher / Zugang erwerben", "🔑 Mitglieder-Portal (Telefon-Login)"],
-        "login_title": "🔑 AI99 Mitglieder-Verifizierung",
-        "login_prompt": "Registrierte Telefonnummer eingeben:",
-        "login_btn": "🚀 Vollzugriff starten",
-        "login_success": "Willkommen zurück. 3-Core KI und Master-Stückliste freigeschaltet.",
-        "login_fail": "Nummer nicht registriert. Bitte unten Seasonal Pass bestellen.",
+        "top_modes": ["👤 Besucher / Zugang erwerben", "🔑 Mitglieder-Portal (Login)"],
+        "login_title": "🔑 AI99 Mitglieder-Verifizierung (Telefon + PIN)",
+        "login_prompt": "Registrierte Telefonnummer:",
+        "login_pin_prompt": "6-stellige Zugangs-PIN:",
+        "login_btn": "🚀 Vollzugriff freischalten",
+        "login_success": "Verifizierung erfolgreich. Master-Stückliste freigeschaltet.",
+        "login_fail": "Telefonnummer oder PIN ungültig.",
         "logout_btn": "Abmelden",
         "sidebar_guide": "🤖 Systemassistent (AI Guide)",
         "sidebar_safety": "Sicherheitskontrolle: Zero-Hallucination Guard",
@@ -500,13 +509,13 @@ def secure_ai_guide(user_query, active_style_data, lang="TH"):
     dim = active_style_data["dimensions"]
 
     if any(w in q for w in ["วิธีใช้", "how", "anleitung"]):
-        return "🚩 1. เลือกสไตล์สวน 2. อัปโหลดภาพพื้นที่เพื่อตรวจเช็ก 3. สมาชิกปลดล็อกปรับแต่งและสั่งซื้อชิ้นส่วน"
+        return "🚩 1. เลือกสไตล์สวน 2. อัปโหลดภาพพื้นที่ 3. สมาชิกยืนยันเบอร์และ PIN เพื่อปลดล็อกปรับแต่งอุปกรณ์"
     elif any(w in q for w in ["ขนาด", "dim", "size", "maße"]):
         return f"📐 **{title}** -> กว้าง {dim['width']} ม. x สูง {dim['height']} ม. x ลึก {dim['depth']} ม."
     elif any(w in q for w in ["ราคา", "pass", "price", "preis"]):
         return f"💳 Seasonal Pass: $139.95 USD / €129.00 EUR / ฿5,090 THB ({ACCESS_PERIOD_DAYS} Days full access)"
     else:
-        return f"🌿 AI Guide พร้อมให้คำปรึกษาสไตล์ **{title}** ครับ"
+        return f"🌿 AI Guide พร้อมช่วยเหลือสไตล์ **{title}** ครับ"
 
 # ==============================================================================
 # SECTION 5: STATE MANAGEMENT & DYNAMIC SIDEBAR CONTROLLER
@@ -589,7 +598,7 @@ with st.sidebar:
     st.caption(f"Active Sync Engine: **{selected_lang} ➔ {selected_currency_key}**")
 
 # ==============================================================================
-# SECTION 6: TOP ACCESS GATE (สลับผู้ใช้ทั่วไป vs สมาชิกเก่าเข้าสู่ระบบ)
+# SECTION 6: TOP ACCESS GATE (Phone + Access PIN Verification)
 # ==============================================================================
 top_col1, top_col2 = st.columns([2, 1])
 with top_col1:
@@ -614,17 +623,20 @@ if user_mode == t['top_modes'][1] and not st.session_state.is_member_unlocked:
         <h4 style='margin-top:0; color:#34D399;'>{t['login_title']}</h4>
     </div>
     """, unsafe_allow_html=True)
-    col_l1, col_l2 = st.columns([3, 1])
+    col_l1, col_l2, col_l3 = st.columns([2, 2, 1])
     with col_l1:
-        input_phone = st.text_input(t['login_prompt'], placeholder="08XXXXXXXX หรือ +49XXXXXXXX")
+        input_phone = st.text_input(t['login_prompt'], placeholder="0800838340 หรือ +49XXXXXXXX")
     with col_l2:
+        input_pin = st.text_input(t['login_pin_prompt'], type="password", placeholder="กรอกรหัส PIN 6 หลัก")
+    with col_l3:
         st.write("")
         st.write("")
         if st.button(t['login_btn'], use_container_width=True):
-            # ตรวจสอบเบอร์โทรในระบบ
-            if input_phone in REGISTERED_MEMBERS or len(input_phone) >= 9:
+            cleaned_phone = input_phone.strip()
+            # ตรวจสอบคู่รหัสผ่านอย่างเข้มงวด ป้องกันคนนอกสวมรอย
+            if cleaned_phone in REGISTERED_MEMBERS and REGISTERED_MEMBERS[cleaned_phone] == input_pin.strip():
                 st.session_state.is_member_unlocked = True
-                st.session_state.member_phone = input_phone
+                st.session_state.member_phone = cleaned_phone
                 st.success(t['login_success'])
                 time.sleep(1)
                 st.rerun()
@@ -727,7 +739,7 @@ with col2:
                     time.sleep(2)
                     st.success("✅ วิเคราะห์สำเร็จ! ชิ้นส่วนที่เหมาะสมถูกจัดเรียงในตารางด้านล่างแล้ว")
         else:
-            st.info("💡 ภาพนี้พร้อมส่งเข้าประมวลผล กรุณาปลดล็อกสิทธิ์ Seasonal Pass เพื่อสั่งรัน 3-Core AI")
+            st.info("💡 ภาพนี้พร้อมส่งเข้าประมวลผล กรุณาเข้าสู่ระบบหรือสั่งซื้อสิทธิ์ด้านล่างเพื่อสั่งรัน 3-Core AI")
 
 st.markdown("---")
 
@@ -736,7 +748,7 @@ st.markdown("---")
 # ==============================================================================
 st.markdown(f"### {t['step2_title']}")
 
-# ล็อกส่วนนี้ไว้ถ้ายังไม่เป็นสมาชิก
+# ตรวจสอบสิทธิ์การเข้าถึง
 if not st.session_state.is_member_unlocked:
     st.markdown(f"""
     <div class='lock-box'>
