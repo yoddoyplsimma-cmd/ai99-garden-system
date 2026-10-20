@@ -54,7 +54,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom Styling สไตล์มินิมอลโมเดิร์น + แถบภาพวิ่งอัตโนมัติไร้รอยต่อ (Infinite Carousel)
+# Custom Styling สไตล์มินิมอลโมเดิร์น + แถบภาพวิ่งอัตโนมัติคลีนๆ ไร้คำบรรยาย (Pure Image Carousel)
 st.markdown("""
 <head>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -123,7 +123,7 @@ st.markdown("""
         color: #1E293B;
         line-height: 1.5;
     }
-    /* Infinite Smooth Carousel Styling */
+    /* Infinite Pure Image Carousel Styling (ไม่มีตัวหนังสือ) */
     .carousel-track-container {
         overflow: hidden;
         width: 100%;
@@ -132,45 +132,37 @@ st.markdown("""
         border: 1px solid #E2E8F0;
         background: #FFFFFF;
         box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+        padding: 6px 0;
     }
     .carousel-track {
         display: flex;
-        width: calc(260px * 8);
-        animation: scroll-left 26s linear infinite;
+        width: calc(240px * 8);
+        animation: scroll-left 24s linear infinite;
     }
     .carousel-track:hover {
         animation-play-state: paused;
     }
     .carousel-slide {
-        width: 260px;
-        padding: 10px;
+        width: 240px;
+        padding: 8px;
         box-sizing: border-box;
         flex-shrink: 0;
     }
     .carousel-slide img {
         width: 100%;
-        height: 155px;
+        height: 160px;
         object-fit: cover;
         border-radius: 10px;
         border: 1px solid #E2E8F0;
-        transition: transform 0.3s ease;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     .carousel-slide img:hover {
-        transform: scale(1.03);
-    }
-    .carousel-caption {
-        font-size: 0.85rem;
-        color: #1E293B;
-        text-align: center;
-        margin-top: 8px;
-        font-weight: 600;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        transform: scale(1.04);
+        box-shadow: 0 6px 14px rgba(0,0,0,0.08);
     }
     @keyframes scroll-left {
         0% { transform: translateX(0); }
-        100% { transform: translateX(calc(-260px * 4)); }
+        100% { transform: translateX(calc(-240px * 4)); }
     }
 </style>
 """, unsafe_allow_html=True)
@@ -201,12 +193,6 @@ I18N = {
         "cam_choice": ["เปิดกล้องสด (Camera)", "อัปโหลดรูปภาพ (Upload)"],
         "cam_prompt": "สแกนมุมระเบียงหรือห้องที่ต้องการจัดวาง",
         "upload_prompt": "เลือกไฟล์ภาพพื้นที่มุมบ้าน (JPG, PNG)",
-        "carousel_caps": [
-            "🌿 สวนผักสลัดแนวตั้งระเบียงคอนโด",
-            "🍄 สมาร์ทฟังกิพอด ตู้เห็ดในร่มกินได้",
-            "🪴 ชั้นวางไม้และไฟปลูกห้องรับแขก",
-            "🏡 แผงสวนแนวตั้งระแนงหน้าบ้าน"
-        ],
         "step2_title": "2. ปรับแต่งรูปทรง สี และจำนวนอุปกรณ์ (Interactive Customizer)",
         "pot_shape_label": "เลือกรูปทรงกระถาง / รางปลูก (Planter Style):",
         "pot_shapes": [
@@ -272,12 +258,6 @@ I18N = {
         "cam_choice": ["Live Camera", "File Upload"],
         "cam_prompt": "Scan your balcony or indoor room corner",
         "upload_prompt": "Upload space image file (JPG, PNG)",
-        "carousel_caps": [
-            "🌿 Minimalist Vertical Balcony Salad Kit",
-            "🍄 Smart Indoor Fungi Chamber Pod",
-            "🪴 Living Room Aesthetic Greenery Stand",
-            "🏡 Front Yard Compact Trellis System"
-        ],
         "step2_title": "2. Customize Shape, Color & Quantities (BOM Configurator)",
         "pot_shape_label": "Select Planter Style / Shape:",
         "pot_shapes": [
@@ -343,12 +323,6 @@ I18N = {
         "cam_choice": ["Live-Kamera", "Datei-Upload"],
         "cam_prompt": "Balkon oder Raumecke scannen",
         "upload_prompt": "Raumbild auswählen (JPG, PNG)",
-        "carousel_caps": [
-            "🌿 Minimalistischer Vertikaler Balkon-Salatgarten",
-            "🍄 Smarte Indoor-Pilzzuchtkammer Pod",
-            "🪴 Ästhetisches Wohnzimmer-Pflanzenregal",
-            "🏡 Kompaktes Vorgarten-Spaliersystem"
-        ],
         "step2_title": "2. Formen, Farben & Stückzahlen anpassen (BOM-Konfigurator)",
         "pot_shape_label": "Pflanzgefäß-Form auswählen:",
         "pot_shapes": [
@@ -606,7 +580,6 @@ def secure_ai_guide(user_query, active_style_data, lang="TH"):
 
     st.session_state.last_request_time = now
 
-    # กวาดล้างคำสั่งโจมตีระบบ (Blacklist Words)
     blacklist = ["ignore previous", "hack", "api key", "password", "system prompt", "database", "token", "root", "script"]
     if any(b in user_query.lower() for b in blacklist):
         if lang == "TH":
@@ -737,7 +710,7 @@ st.markdown(f"<div class='main-title'>{t['title']}</div>", unsafe_allow_html=Tru
 st.markdown(f"<div class='sub-title'>{t['subtitle']}</div>", unsafe_allow_html=True)
 
 # ==============================================================================
-# SECTION 7: STEP 1 - ARCHITECTURE SELECTION & VERIFIED INFINITE CAROUSEL
+# SECTION 7: STEP 1 - ARCHITECTURE SELECTION & PURE FLOWING CAROUSEL
 # ==============================================================================
 st.markdown(f"### {t['step1_title']}")
 
@@ -765,25 +738,23 @@ style_disp_title = current_style["title_th"] if selected_lang == "TH" else (
 
 col1, col2 = st.columns([1, 1])
 
-# รูปภาพ HD ตรงปก 100% ตาม 4 สถาปัตยกรรม (ไม่หลุด ไม่เป็นจอยเกม ไม่เป็นทุ่งนา ไม่แตก)
+# ชุดรูปภาพ 4 สไตล์ตรงรุ่น 100% คมชัด โหลดเร็ว (ไม่มีตัวหนังสือวิ่งบดบัง คลีนๆ สวยงาม)
 IMG_BALCONY = "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=600&q=80"
 IMG_MUSHROOM = "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80"
 IMG_INDOOR = "https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=600&q=80"
 IMG_TRELLIS = "https://images.unsplash.com/photo-1558904541-efa8c4a08931?auto=format&fit=crop&w=600&q=80"
 
-c_caps = t["carousel_caps"]
-
 CAROUSEL_HTML = f"""
 <div class="carousel-track-container">
     <div class="carousel-track">
-        <div class="carousel-slide"><img src="{IMG_BALCONY}"><div class="carousel-caption">{c_caps[0]}</div></div>
-        <div class="carousel-slide"><img src="{IMG_MUSHROOM}"><div class="carousel-caption">{c_caps[1]}</div></div>
-        <div class="carousel-slide"><img src="{IMG_INDOOR}"><div class="carousel-caption">{c_caps[2]}</div></div>
-        <div class="carousel-slide"><img src="{IMG_TRELLIS}"><div class="carousel-caption">{c_caps[3]}</div></div>
-        <div class="carousel-slide"><img src="{IMG_BALCONY}"><div class="carousel-caption">{c_caps[0]}</div></div>
-        <div class="carousel-slide"><img src="{IMG_MUSHROOM}"><div class="carousel-caption">{c_caps[1]}</div></div>
-        <div class="carousel-slide"><img src="{IMG_INDOOR}"><div class="carousel-caption">{c_caps[2]}</div></div>
-        <div class="carousel-slide"><img src="{IMG_TRELLIS}"><div class="carousel-caption">{c_caps[3]}</div></div>
+        <div class="carousel-slide"><img src="{IMG_BALCONY}"></div>
+        <div class="carousel-slide"><img src="{IMG_MUSHROOM}"></div>
+        <div class="carousel-slide"><img src="{IMG_INDOOR}"></div>
+        <div class="carousel-slide"><img src="{IMG_TRELLIS}"></div>
+        <div class="carousel-slide"><img src="{IMG_BALCONY}"></div>
+        <div class="carousel-slide"><img src="{IMG_MUSHROOM}"></div>
+        <div class="carousel-slide"><img src="{IMG_INDOOR}"></div>
+        <div class="carousel-slide"><img src="{IMG_TRELLIS}"></div>
     </div>
 </div>
 """
@@ -834,7 +805,6 @@ if "quantities" not in st.session_state:
 
 total_estimated_base = 0.0
 
-# แสดงหัวตารางสินค้าแบบมืออาชีพ
 header_c1, header_c2, header_c3, header_c4 = st.columns([4, 2, 2, 3])
 with header_c1:
     st.write(f"**{t['col_name']}**")
