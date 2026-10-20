@@ -15,12 +15,11 @@ STRIPE_URL_USD = "https://buy.stripe.com/your_actual_stripe_link_usd"
 STRIPE_URL_EUR = "https://buy.stripe.com/your_actual_stripe_link_eur"
 PROMPTPAY_ID = "0800838340"  # PromptPay ID บัญชีจริงพี่ยอด CEO
 
-# ฐานข้อมูลสมาชิกที่ชำระเงินแล้ว: ล็อกระบบ Phone + Access PIN ป้องกันคนอื่นสวมรอย 100%
 REGISTERED_MEMBERS = {
     "0800838340": "999999",     # บัญชี Master พี่ยอด CEO (PIN: 999999)
-    "080-083-8340": "999999",   # รองรับกรณีพิมพ์แบบมีขีด
-    "080 083 8340": "999999",   # รองรับกรณีพิมพ์แบบเว้นวรรค
-    "+49151234567": "772109"    # ตัวอย่างสมาชิกลูกค้ายุโรป
+    "080-083-8340": "999999",
+    "080 083 8340": "999999",
+    "+49151234567": "772109"
 }
 
 PRICING_CONFIG = {
@@ -60,7 +59,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom Styling ปรับปรุงความคมชัด บล็อกการแคปเซฟรูปภาพ
+# Custom Styling ปรับแต่งหน้าจอคู่เปรียบเทียบ
 st.markdown("""
 <head>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -103,23 +102,24 @@ st.markdown("""
         font-size: 0.85rem;
         font-weight: 600;
     }
-    .white-card { 
+    .display-card { 
         background-color: #1E293B; 
         border: 1px solid #334155; 
         border-radius: 14px; 
-        padding: 22px; 
+        padding: 18px; 
         margin-bottom: 16px; 
         box-shadow: 0 4px 14px rgba(0,0,0,0.2);
         color: #FFFFFF !important;
+        height: 100%;
     }
     .spec-tag { 
         background-color: #0F172A; 
         color: #38BDF8 !important; 
         font-weight: 700; 
-        padding: 6px 14px; 
+        padding: 6px 12px; 
         border-radius: 8px; 
-        font-size: 0.88rem; 
-        margin-right: 8px; 
+        font-size: 0.85rem; 
+        margin-right: 6px; 
         border: 1px solid #334155;
         display: inline-block;
     }
@@ -157,43 +157,6 @@ st.markdown("""
         color: #F8FAFC !important;
         line-height: 1.5;
     }
-    .carousel-track-container {
-        overflow: hidden;
-        width: 100%;
-        border-radius: 14px;
-        margin-top: 18px;
-        border: 1px solid #334155;
-        background: #0F172A;
-        padding: 8px 0;
-    }
-    .carousel-track {
-        display: flex;
-        width: calc(240px * 8);
-        animation: scroll-left 24s linear infinite;
-    }
-    .carousel-track:hover {
-        animation-play-state: paused;
-    }
-    .carousel-slide {
-        width: 240px;
-        padding: 8px;
-        box-sizing: border-box;
-        flex-shrink: 0;
-    }
-    .carousel-slide img {
-        width: 100%;
-        height: 160px;
-        object-fit: cover;
-        border-radius: 10px;
-        border: 1px solid #334155;
-        pointer-events: none;
-        user-select: none;
-        -webkit-user-drag: none;
-    }
-    @keyframes scroll-left {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(calc(-240px * 4)); }
-    }
     .legal-footer {
         background-color: #0F172A;
         border: 1px solid #1E293B;
@@ -220,7 +183,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ==============================================================================
-# SECTION 2: LOCALIZATION (TH / EN / DE)
+# SECTION 2: COMPREHENSIVE LOCALIZATION (TH / EN / DE)
 # ==============================================================================
 I18N = {
     "TH": {
@@ -233,8 +196,8 @@ I18N = {
         "login_prompt": "หมายเลขโทรศัพท์ที่ลงทะเบียน:",
         "login_pin_prompt": "รหัสผ่านลับ Access PIN (6 หลัก):",
         "login_btn": "🚀 ปลดล็อกเข้าใช้งานระบบเต็มรูปแบบ",
-        "login_success": "ยืนยันตัวตนสำเร็จ! ยินดีต้อนรับกลับสู่ระบบ AI99 ปลดล็อกตาราง Master BOM เรียบร้อยแล้ว",
-        "login_fail": "หมายเลขโทรศัพท์หรือรหัส PIN ไม่ถูกต้อง โปรดตรวจสอบข้อมูลอีกครั้งครับ",
+        "login_success": "ยืนยันตัวตนสำเร็จ! ปลดล็อกตาราง Master BOM เรียบร้อยแล้ว",
+        "login_fail": "หมายเลขโทรศัพท์หรือรหัส PIN ไม่ถูกต้อง",
         "logout_btn": "ออกจากระบบ",
         "sidebar_guide": "🤖 ผู้ช่วยแนะนำระบบ (AI Guide)",
         "sidebar_safety": "ระบบคุมตรรกะความปลอดภัย: Zero-Hallucination Guard",
@@ -246,23 +209,23 @@ I18N = {
         "ask_input_label": "พิมพ์ถาม AI ไกด์:",
         "ask_placeholder": "สอบถามขนาด สเปก หรือวิธีสั่งซื้อ...",
         "btn_send": "ส่งคำถาม",
-        "step1_title": "1. เลือกสไตล์สวนที่ต้องการจัดวาง",
-        "style_label": "รูปแบบสไตล์มาตรฐานที่ผ่านการคำนวณโครงสร้างแล้ว:",
-        "dim_title": "📌 สเปกมิติมาตรฐานของพื้นที่ (Standard Space Dimensions)",
-        "dim_w": "ความกว้าง", "dim_h": "ความสูง", "dim_d": "ความลึก", "meter": "เมตร",
-        "category_txt": "ประเภทหมวดหมู่", "arch_name": "ชื่อสถาปัตยกรรม",
-        "scan_header": "📷 อัปโหลดหรือสแกนภาพพื้นที่จริงของคุณ",
-        "scan_desc": "บันทึกภาพมุมระเบียง ห้อง หรือสวน เพื่อให้ระบบนำไปคำนวณสัดส่วน (Zero-Token Check ตรวจสอบภาพฟรี)",
-        "cam_choice": ["📁 อัปโหลดรูปภาพ (Upload File)", "📷 เปิดกล้องสด (Camera)"],
-        "cam_prompt": "สแกนมุมระเบียงหรือห้องที่ต้องการจัดวาง",
-        "upload_prompt": "เลือกไฟล์ภาพพื้นที่มุมบ้าน (JPG, PNG)",
+        "step1_title": "1. เลือกสไตล์สวนต้นแบบ & เทียบกับมุมห้องจริงของคุณ",
+        "style_label": "เลือกสไตล์สวนมาตรฐานที่ผ่านการคำนวณโครงสร้างแล้ว:",
+        "model_screen_title": "🖼️ ภาพต้นแบบสไตล์ที่เลือก (Architecture Blueprint)",
+        "user_screen_title": "📷 ภาพพื้นที่มุมบ้านจริงของคุณ (Your Space Upload)",
+        "dim_title": "📌 สเปกมิติมาตรฐานของพื้นที่",
+        "dim_w": "กว้าง", "dim_h": "สูง", "dim_d": "ลึก", "meter": "ม.",
+        "category_txt": "หมวดหมู่", "arch_name": "ชื่อสถาปัตยกรรม",
+        "scan_desc": "อัปโหลดภาพมุมห้องหรือระเบียงจริงเพื่อดูการจัดวาง (รองรับ JPG, PNG)",
+        "upload_prompt": "เลือกไฟล์ภาพมุมบ้านของคุณ",
         "confirm_ai_btn": "⚡ ส่งภาพเข้าสู่ 3-Core AI เพื่อคำนวณมิติและจับคู่ชิ้นส่วน",
-        "step2_title": "2. ปรับแต่งรูปทรง สี และจำนวนอุปกรณ์ (Interactive Customizer)",
+        "step2_title": "2. ปรับแต่งรูปทรงกระถาง สี และดูรายการอุปกรณ์ (Interactive Customizer)",
         "bom_locked_msg": "🔒 **ส่วนตาราง Master BOM และการปรับแต่งสเปกถูกล็อก:** สงวนสิทธิ์การใช้งานสำหรับผู้ถือ Seasonal Access Pass (120 วัน) เท่านั้น กรุณาเข้าสู่ระบบด้วยเบอร์โทรศัพท์และรหัส PIN หรือชำระเงินด้านล่าง",
         "pot_shape_label": "เลือกรูปทรงกระถาง / รางปลูก (Planter Style):",
         "pot_shapes": ["รางยาวมินิมอล (Rectangular Trough)", "ทรงกระบอกโมเดิร์น (Cylinder Modern)", "สี่เหลี่ยมลูกบาศก์ (Square Cube)", "ทรงกลมคลาสสิก (Round Classic)"],
         "pot_color_label": "เลือกโทนสีและเนื้อวัสดุ (Color & Texture):",
         "pot_colors": ["ดำด้านลอฟท์ (Matte Black)", "ขาวคลีนมินิมอล (Matte White)", "เทาคอนกรีตโมเดิร์น (Concrete Grey)", "ดินเผาธรรมชาติ (Terracotta)"],
+        "pot_preview_title": "🪴 ภาพตัวอย่างรูปทรงกระถางที่เลือก:",
         "bom_title": "📦 ตารางรายการอุปกรณ์ในเซ็ต (Bill of Materials)",
         "col_name": "รายการอุปกรณ์", "col_qty": "จำนวน (ชิ้น)", "col_price": "ราคาแปลง", "col_link": "สั่งซื้อผ่านระบบ",
         "est_price": "ประมาณการชิ้นละ", "btn_amazon": "ดูบน Amazon ↗",
@@ -298,8 +261,8 @@ I18N = {
         "login_prompt": "Registered Phone Number:",
         "login_pin_prompt": "6-Digit Access PIN:",
         "login_btn": "🚀 Access Full System",
-        "login_success": "Authentication successful. 3-Core AI Engine and Master BOM unlocked.",
-        "login_fail": "Invalid phone number or PIN. Please verify credentials.",
+        "login_success": "Authentication successful. Master BOM unlocked.",
+        "login_fail": "Invalid phone number or PIN.",
         "logout_btn": "Sign Out",
         "sidebar_guide": "🤖 Assistant Guide (AI Guide)",
         "sidebar_safety": "Safety Logic Protocol: Zero-Hallucination Guard",
@@ -311,23 +274,23 @@ I18N = {
         "ask_input_label": "Ask AI Guide:",
         "ask_placeholder": "Inquire dimensions, BOM specs, or orders...",
         "btn_send": "Send Inquiry",
-        "step1_title": "1. Select Desired Garden Architecture",
-        "style_label": "Engineered Standard Archetypes:",
-        "dim_title": "📌 Standard Specifications & Dimensions",
-        "dim_w": "Width", "dim_h": "Height", "dim_d": "Depth", "meter": "m",
-        "category_txt": "Category", "arch_name": "Architecture Title",
-        "scan_header": "📷 Upload or Scan Your Space",
-        "scan_desc": "Provide a photo of your space for dimensional analysis (Zero-Token Quality Check).",
-        "cam_choice": ["📁 File Upload", "📷 Live Camera"],
-        "cam_prompt": "Scan your balcony or indoor room corner",
-        "upload_prompt": "Upload space image file (JPG, PNG)",
-        "confirm_ai_btn": "⚡ Submit to 3-Core AI for Spatial Analysis & BOM Matching",
+        "step1_title": "1. Select Architecture Model & Compare with Your Space",
+        "style_label": "Select Engineered Standard Archetype:",
+        "model_screen_title": "🖼️ Archetype Blueprint Display",
+        "user_screen_title": "📷 Your Actual Space Photo Upload",
+        "dim_title": "📌 Space Standard Dimensions",
+        "dim_w": "W", "dim_h": "H", "dim_d": "D", "meter": "m",
+        "category_txt": "Category", "arch_name": "Title",
+        "scan_desc": "Upload your space photo for side-by-side comparison (JPG, PNG).",
+        "upload_prompt": "Upload your space photo",
+        "confirm_ai_btn": "⚡ Submit to 3-Core AI for Analysis & BOM Matching",
         "step2_title": "2. Customize Shape, Color & Quantities (BOM Configurator)",
         "bom_locked_msg": "🔒 **Master BOM & Customizer Locked:** Reserved exclusively for Seasonal Access Pass holders. Please authenticate with Phone & PIN or purchase access below.",
         "pot_shape_label": "Select Planter Style / Shape:",
         "pot_shapes": ["Rectangular Trough", "Cylinder Modern", "Square Cube", "Round Classic"],
         "pot_color_label": "Select Material Texture & Color:",
         "pot_colors": ["Matte Black Loft", "Matte White Minimal", "Concrete Grey Modern", "Terracotta Natural"],
+        "pot_preview_title": "🪴 Selected Planter Form Preview:",
         "bom_title": "📦 Bill of Materials (BOM Dataset)",
         "col_name": "Equipment Name", "col_qty": "Quantity", "col_price": "Converted Price", "col_link": "Amazon Sourcing",
         "est_price": "Est. Unit Price", "btn_amazon": "View on Amazon ↗",
@@ -338,19 +301,19 @@ I18N = {
         "legal_rule1": f"- Grants full access to blueprints, architectural specs, and dimensional layouts for <b>{ACCESS_PERIOD_DAYS} days (Full 4-Month Quarter)</b>",
         "legal_rule2": "- Automatically terminates after 120 days without hidden recurring charges.",
         "legal_rule3": "- System access constitutes immediate and final delivery of digital assets with binding legal enforcement.",
-        "legal_notice": "ℹ️ **Pre-Payment Notice:** Please review and accept both mandatory conditions below to unlock the payment gateway for your 120-Day Seasonal Access Pass.",
+        "legal_notice": "ℹ️ **Pre-Payment Notice:** Please review and accept both mandatory conditions below to unlock payment checkout.",
         "chk1_txt": "1. I accept the AI99 Terms of Service and Intellectual Property Policy.",
-        "chk2_txt": "2. I acknowledge and agree to the 100% Strict Non-Refundable Policy once access is granted.",
-        "legal_unlock": "✅ Terms accepted. Payment gateway for the 4-month pass is unlocked.",
+        "chk2_txt": "2. I acknowledge and agree to 100% Strict Non-Refundable Policy once access is granted.",
+        "legal_unlock": "✅ Terms accepted. Payment gateway unlocked.",
         "legal_lock": "Please accept both mandatory checkboxes above to unlock payment checkout.",
         "pay_usd_tab": "💳 International Card (USD)", "pay_eur_tab": "💶 European Card (EUR)", "pay_thb_tab": "📱 PromptPay QR (THB)",
-        "pay_stripe_desc": "Pay 4-Month Seasonal Pass via secure Stripe international gateway.",
+        "pay_stripe_desc": "Pay 4-Month Seasonal Pass via secure Stripe gateway.",
         "btn_stripe": "🚀 Unlock 4-Month Access",
         "pay_thb_desc": "Scan PromptPay QR for direct local transfer.",
         "upload_slip": "Upload bank transfer confirmation slip:",
         "btn_slip": "Submit Transfer Slip",
         "slip_ok": "Slip received. Your Access PIN will be issued shortly.",
-        "aff_disclosure": "📢 **Affiliate Disclosure:** As an Amazon Associate, we earn from qualifying purchases at zero additional cost to you. Uploaded images are strictly processed in private sessions and are never stored or shared publicly.",
+        "aff_disclosure": "📢 **Affiliate Disclosure:** As an Amazon Associate, we earn from qualifying purchases at zero additional cost to you. Uploaded images are strictly processed in private sessions and are never stored publicly.",
         "footer_rights": "© 2026 AI99 Garden Design Architecture. All rights reserved."
     },
     "DE": {
@@ -376,16 +339,15 @@ I18N = {
         "ask_input_label": "Frage an den AI-Guide:",
         "ask_placeholder": "Maße, Stückliste oder Bestellung anfragen...",
         "btn_send": "Frage senden",
-        "step1_title": "1. Gewünschten Gartenstil auswählen",
+        "step1_title": "1. Modell auswählen & mit Ihrem Raum vergleichen",
         "style_label": "Berechnete Standard-Architekturmodelle:",
+        "model_screen_title": "🖼️ Ausgewählter Bauplan-Stil",
+        "user_screen_title": "📷 Foto Ihres Raumes",
         "dim_title": "📌 Standardspezifikationen & Abmessungen",
-        "dim_w": "Breite", "dim_h": "Höhe", "dim_d": "Tiefe", "meter": "m",
-        "category_txt": "Kategorie", "arch_name": "Architektur-Titel",
-        "scan_header": "📷 Scannen oder Hochladen Ihres Raumbildes",
-        "scan_desc": "Erfassen oder laden Sie Ihren Balkon hoch (Kostenlose Qualitätsprüfung).",
-        "cam_choice": ["📁 Datei-Upload", "📷 Live-Kamera"],
-        "cam_prompt": "Balkon oder Raumecke scannen",
-        "upload_prompt": "Raumbild auswählen (JPG, PNG)",
+        "dim_w": "B", "dim_h": "H", "dim_d": "T", "meter": "m",
+        "category_txt": "Kategorie", "arch_name": "Titel",
+        "scan_desc": "Laden Sie Ihr Raumbild hoch für den direkten Vergleich (JPG, PNG).",
+        "upload_prompt": "Raumbild auswählen",
         "confirm_ai_btn": "⚡ An 3-Core KI zur Maßanalyse übermitteln",
         "step2_title": "2. Formen, Farben & Stückzahlen anpassen (BOM-Konfigurator)",
         "bom_locked_msg": "🔒 **Master-Stückliste gesperrt:** Exklusiv für Inhaber des Seasonal Access Pass (120 Tage). Bitte einloggen oder unten freischalten.",
@@ -393,6 +355,7 @@ I18N = {
         "pot_shapes": ["Rechteckiger Trog (Minimal)", "Zylinder Modern", "Würfel (Square)", "Runder Topf (Klassisch)"],
         "pot_color_label": "Farbton & Textur auswählen:",
         "pot_colors": ["Mattschwarz Loft", "Mattweiß Minimal", "Betongrau Modern", "Terrakotta Natur"],
+        "pot_preview_title": "🪴 Ausgewählte Pflanzgefäß-Vorschau:",
         "bom_title": "📦 Stückliste der Ausrüstung (Bill of Materials)",
         "col_name": "Artikelname", "col_qty": "Menge", "col_price": "Umgerechneter Preis", "col_link": "Amazon-Beschaffung",
         "est_price": "Geschätzter Einzelpreis", "btn_amazon": "Auf Amazon ansehen ↗",
@@ -403,7 +366,7 @@ I18N = {
         "legal_rule1": f"- Gültig für vollen Zugriff auf Baupläne für <b>{ACCESS_PERIOD_DAYS} Tage (4 volle Monate)</b>",
         "legal_rule2": "- Endet automatisch nach 120 Tagen ohne Folgekosten.",
         "legal_rule3": "- Der Systemzugang gilt als vollständige digitale Bereitstellung.",
-        "legal_notice": "ℹ️ **Hinweis vor der Zahlung:** Pflichtfelder bestätigen, um Zahlung freizuschalten.",
+        "legal_notice": "ℹ️ **Hinweis vor der Zahlung:** Pflichtfelder bestätigen zur Freischaltung.",
         "chk1_txt": "1. Ich akzeptiere die AI99-Nutzungsbedingungen und Richtlinien.",
         "chk2_txt": "2. Ich bestätige den 100%igen Verzicht auf Rückerstattung nach Bereitstellung.",
         "legal_unlock": "✅ Bedingungen akzeptiert. Zahlung freigeschaltet.",
@@ -421,7 +384,7 @@ I18N = {
 }
 
 # ==============================================================================
-# SECTION 3: MASTER ARCHITECTURAL CATALOG
+# SECTION 3: MASTER ARCHITECTURAL CATALOG (รูปภาพตรงรุ่นจากโฟลเดอร์ของพี่ยอด)
 # ==============================================================================
 CATALOG = {
     "STYLE-BAL-01": {
@@ -429,6 +392,7 @@ CATALOG = {
         "title_en": "Minimalist Vertical Balcony Salad Kit",
         "title_de": "Minimalistischer Vertikaler Balkon-Salatgarten",
         "category": "Balcony Micro-Space",
+        "image_url": "https://lh3.googleusercontent.com/d/1y3A2kCG-JhqbysqN6e0M5aG4iiG3HRdD",
         "dimensions": {"width": 1.20, "height": 2.00, "depth": 0.45},
         "default_items": [
             {"id": "rack", "name": "โครงชั้นวางกัลวาไนซ์ 4-5 ชั้น ทรง Slim", "name_en": "Slim Galvanized 5-Tier Rack", "name_de": "Schlankes 5-Etagen-Regal Verzinkt", "qty": 1, "price_usd": 45.0, "search": "vertical garden wall planter rack outdoor"},
@@ -442,6 +406,7 @@ CATALOG = {
         "title_en": "Indoor Micro Mushroom Chamber",
         "title_de": "Smarte Indoor-Pilzzuchtkammer",
         "category": "Mushroom Chamber",
+        "image_url": "https://lh3.googleusercontent.com/d/1xcOBnsLuCZBM7gVe8XURQqrlnP7-R-pO",
         "dimensions": {"width": 0.50, "height": 0.70, "depth": 0.40},
         "default_items": [
             {"id": "chamber", "name": "ตู้โหลแก้ว/อะคริลิก คุมความชื้นมินิมอล", "name_en": "Humidity Controlled Chamber Tent", "name_de": "Feuchtigkeitsgesteuerte Zuchtkammer", "qty": 1, "price_usd": 55.0, "search": "mushroom fruiting chamber grow tent"},
@@ -455,6 +420,7 @@ CATALOG = {
         "title_en": "Living Room Aesthetic Greenery Stand",
         "title_de": "Ästhetisches Wohnzimmer-Pflanzenregal",
         "category": "Indoor Greenery",
+        "image_url": "https://lh3.googleusercontent.com/d/1-8q8l4pGELAYp0_tn6Z387aq9XclS_3p",
         "dimensions": {"width": 1.00, "height": 1.60, "depth": 0.35},
         "default_items": [
             {"id": "wood_rack", "name": "ชั้นวางไม้โครงเหล็กนอร์ดิก 4 ชั้น", "name_en": "4-Tier Nordic Metal Wood Plant Stand", "name_de": "4-stufiges Metall-Holz-Pflanzenregal", "qty": 1, "price_usd": 62.0, "search": "tiered plant stand indoor metal wood tall"},
@@ -467,6 +433,7 @@ CATALOG = {
         "title_en": "Front Yard Compact Trellis System",
         "title_de": "Kompaktes Vorgarten-Spaliersystem",
         "category": "Front Yard",
+        "image_url": "https://lh3.googleusercontent.com/d/1AjZgaGwLXlwB7neIQLvUmLmYR3-b3YJF",
         "dimensions": {"width": 1.80, "height": 1.80, "depth": 0.50},
         "default_items": [
             {"id": "trellis", "name": "แผงระแนงเหล็กโมดูลาร์ตั้งพื้น พ่นกันสนิม", "name_en": "Freestanding Modular Garden Trellis", "name_de": "Freistehendes Modulares Gartenspalier", "qty": 1, "price_usd": 78.0, "search": "freestanding garden trellis wall panel metal"},
@@ -474,6 +441,14 @@ CATALOG = {
             {"id": "timer_drip", "name": "ระบบน้ำหยด PE พร้อมไทม์เมอร์ก๊อกน้ำ", "name_en": "Faucet Hose Timer + Drip Kit", "name_de": "Wasserhahn-Timer mit Tropfbewässerung", "qty": 1, "price_usd": 24.0, "search": "outdoor faucet hose timer with drip distribution tubing"}
         ]
     }
+}
+
+# ฐานข้อมูลภาพพรีวิวรูปทรงกระถางจริง (ดึงตามทรงที่เลือก)
+POT_SHAPE_IMAGES = {
+    0: "https://images.unsplash.com/photo-1592150621744-aca64f48394a?auto=format&fit=crop&w=400&q=80",  # รางยาวมินิมอล
+    1: "https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=400&q=80",  # ทรงกระบอก
+    2: "https://images.unsplash.com/photo-1512428813834-c702c7702b78?auto=format&fit=crop&w=400&q=80",  # สี่เหลี่ยมลูกบาศก์
+    3: "https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?auto=format&fit=crop&w=400&q=80"   # ทรงกลมคลาสสิก
 }
 
 def get_amazon_link(keyword):
@@ -509,7 +484,7 @@ def secure_ai_guide(user_query, active_style_data, lang="TH"):
     dim = active_style_data["dimensions"]
 
     if any(w in q for w in ["วิธีใช้", "how", "anleitung"]):
-        return "🚩 1. เลือกสไตล์สวน 2. อัปโหลดภาพพื้นที่ 3. สมาชิกยืนยันเบอร์และ PIN เพื่อปลดล็อกปรับแต่งอุปกรณ์"
+        return "🚩 1. เลือกสไตล์สวนเทียบกับมุมห้องจริง 2. อัปโหลดภาพ 3. ยืนยันเบอร์+PIN เพื่อปลดล็อกปรับแต่งอุปกรณ์"
     elif any(w in q for w in ["ขนาด", "dim", "size", "maße"]):
         return f"📐 **{title}** -> กว้าง {dim['width']} ม. x สูง {dim['height']} ม. x ลึก {dim['depth']} ม."
     elif any(w in q for w in ["ราคา", "pass", "price", "preis"]):
@@ -598,7 +573,7 @@ with st.sidebar:
     st.caption(f"Active Sync Engine: **{selected_lang} ➔ {selected_currency_key}**")
 
 # ==============================================================================
-# SECTION 6: TOP ACCESS GATE (Phone + Access PIN Verification)
+# SECTION 6: TOP ACCESS GATE
 # ==============================================================================
 top_col1, top_col2 = st.columns([2, 1])
 with top_col1:
@@ -619,7 +594,7 @@ with top_col2:
 
 if user_mode == t['top_modes'][1] and not st.session_state.is_member_unlocked:
     st.markdown(f"""
-    <div class='white-card' style='border: 1px solid #10B981;'>
+    <div class='display-card' style='border: 1px solid #10B981;'>
         <h4 style='margin-top:0; color:#34D399;'>{t['login_title']}</h4>
     </div>
     """, unsafe_allow_html=True)
@@ -633,7 +608,6 @@ if user_mode == t['top_modes'][1] and not st.session_state.is_member_unlocked:
         st.write("")
         if st.button(t['login_btn'], use_container_width=True):
             cleaned_phone = input_phone.strip()
-            # ตรวจสอบคู่รหัสผ่านอย่างเข้มงวด ป้องกันคนนอกสวมรอย
             if cleaned_phone in REGISTERED_MEMBERS and REGISTERED_MEMBERS[cleaned_phone] == input_pin.strip():
                 st.session_state.is_member_unlocked = True
                 st.session_state.member_phone = cleaned_phone
@@ -655,7 +629,7 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # ==============================================================================
-# SECTION 8: STEP 1 - ARCHITECTURE SELECTION & PRE-CONFIRMATION GATE
+# SECTION 8: STEP 1 - DUAL SCREEN COMPARISON (จอคู่เปรียบเทียบภาพต้นแบบ vs มุมบ้านจริง)
 # ==============================================================================
 st.markdown(f"### {t['step1_title']}")
 
@@ -681,74 +655,55 @@ style_disp_title = current_style["title_th"] if selected_lang == "TH" else (
     current_style["title_de"] if selected_lang == "DE" else current_style["title_en"]
 )
 
-col1, col2 = st.columns([1, 1], gap="medium")
+# แบ่ง 2 ช่องคู่ชัดเจน (ภาพต้นแบบ ซ้าย | ภาพมุมบ้านจริง ขวา)
+col_screen_left, col_screen_right = st.columns([1, 1], gap="large")
 
-IMG_BALCONY = "https://lh3.googleusercontent.com/d/1y3A2kCG-JhqbysqN6e0M5aG4iiG3HRdD"
-IMG_MUSHROOM = "https://lh3.googleusercontent.com/d/1xcOBnsLuCZBM7gVe8XURQqrlnP7-R-pO"
-IMG_INDOOR = "https://lh3.googleusercontent.com/d/1-8q8l4pGELAYp0_tn6Z387aq9XclS_3p"
-IMG_TRELLIS = "https://lh3.googleusercontent.com/d/1AjZgaGwLXlwB7neIQLvUmLmYR3-b3YJF"
-
-CAROUSEL_HTML = f"""
-<div class="carousel-track-container">
-    <div class="carousel-track">
-        <div class="carousel-slide"><img src="{IMG_BALCONY}"></div>
-        <div class="carousel-slide"><img src="{IMG_MUSHROOM}"></div>
-        <div class="carousel-slide"><img src="{IMG_INDOOR}"></div>
-        <div class="carousel-slide"><img src="{IMG_TRELLIS}"></div>
-        <div class="carousel-slide"><img src="{IMG_BALCONY}"></div>
-        <div class="carousel-slide"><img src="{IMG_MUSHROOM}"></div>
-        <div class="carousel-slide"><img src="{IMG_INDOOR}"></div>
-        <div class="carousel-slide"><img src="{IMG_TRELLIS}"></div>
-    </div>
-</div>
-"""
-
-with col1:
+with col_screen_left:
     st.markdown(f"""
-    <div class='white-card'>
-        <h4 style='color: #F8FAFC; margin-top:0;'>{t['dim_title']}</h4>
-        <div style='margin-bottom: 12px;'>
+    <div class='display-card'>
+        <h4 style='color: #38BDF8; margin-top:0;'>{t['model_screen_title']}</h4>
+        <div style='margin-bottom: 10px;'>
             <span class='spec-tag'>{t['dim_w']}: {dim['width']} {t['meter']}</span>
             <span class='spec-tag'>{t['dim_h']}: {dim['height']} {t['meter']}</span>
             <span class='spec-tag'>{t['dim_d']}: {dim['depth']} {t['meter']}</span>
         </div>
-        <p style='margin: 0; color: #CBD5E1; font-size: 0.92rem; line-height: 1.6;'>
-            <b>{t['category_txt']}:</b> {current_style['category']}<br>
+        <p style='margin: 0 0 10px 0; color: #94A3B8; font-size: 0.9rem;'>
             <b>{t['arch_name']}:</b> {style_disp_title}
         </p>
     </div>
     """, unsafe_allow_html=True)
-    
-    st.markdown(CAROUSEL_HTML, unsafe_allow_html=True)
+    # แสดงภาพต้นแบบชัดเจนเต็มช่อง
+    st.image(current_style["image_url"], caption=f"ต้นแบบ: {style_disp_title}", use_container_width=True)
 
-with col2:
-    st.markdown(f"#### {t['scan_header']}")
-    st.caption(t['scan_desc'])
-    cam_mode = st.radio("Camera Option:", t['cam_choice'], index=0, horizontal=True, label_visibility="collapsed")
-    uploaded_file = None
-    if cam_mode == t['cam_choice'][1]:
-        uploaded_file = st.camera_input(t['cam_prompt'])
-    else:
-        uploaded_file = st.file_uploader(t['upload_prompt'], type=["jpg", "png", "jpeg"])
+with col_screen_right:
+    st.markdown(f"""
+    <div class='display-card'>
+        <h4 style='color: #34D399; margin-top:0;'>{t['user_screen_title']}</h4>
+        <p style='margin: 0; color: #94A3B8; font-size: 0.88rem;'>{t['scan_desc']}</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    uploaded_file = st.file_uploader(t['upload_prompt'], type=["jpg", "png", "jpeg", "webp", "JPG", "PNG"])
 
     if uploaded_file is not None:
-        st.image(uploaded_file, caption="ภาพพรีวิวมุมพื้นที่จริงของคุณ (Zero-Token Check)", width=320)
+        st.image(uploaded_file, caption="มุมบ้านจริงของคุณ (พร้อมนำไปวิเคราะห์มิติ)", use_container_width=True)
         if st.session_state.is_member_unlocked:
             if st.button(t['confirm_ai_btn'], use_container_width=True):
-                with st.spinner("3-Core AI กำลังวิเคราะห์แสงแดด มิติพื้นที่ และดึงชิ้นส่วนอุปกรณ์จาก Amazon..."):
+                with st.spinner("3-Core AI กำลังวิเคราะห์มุมระนาบ แสงแดด และสแกนมิติพื้นที่..."):
                     time.sleep(2)
-                    st.success("✅ วิเคราะห์สำเร็จ! ชิ้นส่วนที่เหมาะสมถูกจัดเรียงในตารางด้านล่างแล้ว")
+                    st.success("✅ วิเคราะห์มิติสำเร็จ! ระบบจัดวางชิ้นส่วนที่ตรงขนาดลงในตารางด้านล่างแล้ว")
         else:
-            st.info("💡 ภาพนี้พร้อมส่งเข้าประมวลผล กรุณาเข้าสู่ระบบหรือสั่งซื้อสิทธิ์ด้านล่างเพื่อสั่งรัน 3-Core AI")
+            st.info("💡 ภาพพร้อมประมวลผล กรุณายืนยันตัวตนสมาชิกเพื่อสั่งรัน 3-Core AI")
+    else:
+        st.caption("ℹ️ เมื่ออัปโหลดไฟล์ภาพแล้ว รูปถ่ายของคุณจะปรากฏขึ้นที่ช่องนี้เพื่อเปรียบเทียบทันที")
 
 st.markdown("---")
 
 # ==============================================================================
-# SECTION 9: STEP 2 - INTERACTIVE BOM CONFIGURATOR (GATED ACCESS)
+# SECTION 9: STEP 2 - INTERACTIVE BOM CONFIGURATOR & PLANTER PREVIEW
 # ==============================================================================
 st.markdown(f"### {t['step2_title']}")
 
-# ตรวจสอบสิทธิ์การเข้าถึง
 if not st.session_state.is_member_unlocked:
     st.markdown(f"""
     <div class='lock-box'>
@@ -757,11 +712,20 @@ if not st.session_state.is_member_unlocked:
     </div>
     """, unsafe_allow_html=True)
 else:
-    col_opt1, col_opt2 = st.columns(2)
+    col_opt1, col_opt2, col_opt3 = st.columns([1, 1, 1], gap="medium")
     with col_opt1:
-        pot_shape = st.selectbox(t['pot_shape_label'], t['pot_shapes'])
+        pot_shape_idx = st.selectbox(
+            t['pot_shape_label'], 
+            range(len(t['pot_shapes'])), 
+            format_func=lambda x: t['pot_shapes'][x]
+        )
+        pot_shape = t['pot_shapes'][pot_shape_idx]
     with col_opt2:
         pot_color = st.selectbox(t['pot_color_label'], t['pot_colors'])
+    with col_opt3:
+        # ช่องแสดงภาพพรีวิวรูปทรงกระถางจริงที่คลิกเลือก
+        st.markdown(f"**{t['pot_preview_title']}**")
+        st.image(POT_SHAPE_IMAGES[pot_shape_idx], caption=pot_shape.split(' ')[0], width=160)
 
     st.markdown(f"#### {t['bom_title']}")
 
